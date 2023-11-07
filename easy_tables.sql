@@ -18,6 +18,5 @@ CREATE TABLE team (
     t_foundyear date not null,
     t_city varchar(50),
     t_cid int, 
-    t_manager varchar(50),
     t_stid int
 )
