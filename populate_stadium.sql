@@ -7,7 +7,7 @@ VALUES
 (1, 'State Farm Arena', 680000, 'Atlanta'),
 (2, 'TD Garden', 750000, 'Boston'),
 (21, 'Paycom Center', 581000, 'Oklahoma CIty'),
-(14, 'Crypto.com Arena', 950000, 'Los Angeles'),
+-- (14, 'Crypto.com Arena', 950000, 'Los Angeles'), --
 (29, 'Vivint Arena', 1100000, 'Salt Lake City'),
 (15, 'FedExForum', 805850, 'Memphis'),
 (17, 'Fiserv Forum', 714000, 'Milwaukee'),
@@ -23,7 +23,7 @@ VALUES
 (25, 'Moda Center', 785000, 'Portland'),
 (3, 'Barclays Center', 670000, 'Brooklyn'),
 (30, 'Capital One Arena', 1020000, 'Washington'),
-(4, 'United Cente', 960000, 'Chicago'),
+(4, 'United Center', 960000, 'Chicago'),
 (27, 'Frost Bank Center', 750500, 'San Antonio'),
 (28, 'Scotiabank Arena', 665000, 'Toronto'),
 (6, 'Rocket Mortgage Fieldhouse', 152970, 'Cleveland'),
