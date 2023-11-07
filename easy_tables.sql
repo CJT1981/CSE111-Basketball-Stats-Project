@@ -17,6 +17,6 @@ CREATE TABLE team (
     t_tname varchar(50),
     t_foundyear date not null,
     t_city varchar(50),
-    t_cid int, 
-    t_stid int
+    t_coachid int, 
+    t_stadiumid int
 )
