@@ -1,34 +1,34 @@
-INSERT INTO team (t_tname, t_foundyear, t_city, t_coachid, t_manager, t_stid)
+INSERT INTO team (t_teamid, t_tname, t_foundyear, t_city, t_coachid, t_stadiumid)
 
 VALUES
 
-('Sacramento Kings', 1985, 'Sacramento', --Mike Brown--, , --Golden 1 Center--), 1923
-('Golden State Warriors', 1971, 'San Francisco', --Steve Kerr--, , --Chase Center--), 1946
-('Atlanta Hawks', 1968, 'Atlanta', --Quin Snyder--, , --State Farm Arena--), 1946
-('Boston Celtics', 1946, 'Boston', --Joe Mazzulla--, , --TD Garden--),
-('Oklahoma City Thunder', 2008, 'Oklahoma City', --Mark Daigneault--, , --Paycom Center--), 1967
-('Los Angeles Lakers', 1960, 'Los Angeles', --Darvin Ham--, , --Crypto.com Arena--), 1947
-('Utah Jazz', 1979, 'Salt Lake City', --Will Hardy--, , --Vivint Arena--), 1974
-('Memphis Grizzlies', 2001, 'Memphis', --Taylor Jenkins--, , --FedEx Forum--), 1995
-('Milwaukee Bucks', 1968, 'Milwaukee', --Mike Budenholzer--, , --Fiserv Forum--),
-('Indiana Pacers', 1976, 'Indianapolis', --Rick Carlisle--, , --Gainbridge Fieldhouse--), 1967
-('New York Knicks', 1946, 'New York', --Tom Thibodeau--, , --Madison Square Garden--),
-('Denver Nuggets', 1976, 'Denver', --Michael Malone--, , --Ball Arena--), 1967
-('Minnesota Timberwolves', 1989, 'Minneapolis', --Chris Finch--, , --Target Center--),
-('Philadelphia 76ers', 1963, 'Philadelphia', --Doc Rivers--, , --Wells Fargo Center--), 1946
-('New Orleans Pelicans', 2013, 'New Orleans', --Willie Green--, , --Smoothie King Center--), 2002
-('Dallas Mavericks', 1980, 'Dallas', --Jason Kidd--, , --American Airlines Center--),
-('Phoenix Suns', 1968, 'Phoenix', --Monty Williams--, , --Footprint Center--),
-('Los Angeles Clippers', 1984, 'Los Angeles', --Tyronn Lue--, , --Crypto.com Arena--), 1970
-('Portland Trail Blazers', 1970, 'Portland', --Chauncey Billups--, , --Moda Center--),
-('Brooklyn Nets', 2012, 'Brooklyn', --Jacque Vaughn--, , --Barclays Center--), 1967
-('Washington Wizards', 1997, 'Washington', --Wes Unseld--, , --Capital One Arena--), 1961
-('Chicago Bulls', 1966, 'Chicago', --Billy Donovan--, , --United Center--),
-('San Antonio Spurs', 1976, 'San Antonio', --Gregg Popovich--, , --Frost Bank Center--), 1967
-('Toronto Raptors', 1995, 'Toronto', --Nick Nurse--, , --Scotiabank Arena--),
-('Cleveland Cavaliers', 1970, 'Cleveland', --J.B. Bickerstaff--, , --Rocket Mortgage Fieldhouse--),
-('Orlando Magic', 1989, 'Orlando', --Jamahl Mosley--, , --Amway Center--),
-('Charlotte Hornets', 1988, 'Charlotte', --Steve Clifford--, , --Spectrum Center--),
-('Houston Rockets', 1971, 'Houston', --Stephen Silas--, , --Toyota Center--), 1967
-('Detroit Pistons', 1957, 'Detroit', --Dwane Casey--, , --Little Caesars Arena--), 1937
-('Miami Heat', 1988, 'Miami', --Erik Spoelstra--, , --Kaseya Center--)
+(26,'Sacramento Kings', 1985, 'Sacramento', 26, 26), 
+(10, 'Golden State Warriors', 1971, 'San Francisco', 10, 10), 
+(1, 'Atlanta Hawks', 1968, 'Atlanta', 1, 1), 
+(2, 'Boston Celtics', 1946, 'Boston', 2, 2),
+(21, 'Oklahoma City Thunder', 2008, 'Oklahoma City', 21, 21), 
+(14, 'Los Angeles Lakers', 1960, 'Los Angeles', 14, 14), 
+(29, 'Utah Jazz', 1979, 'Salt Lake City', 29, 29), 
+(15, 'Memphis Grizzlies', 2001, 'Memphis', 15, 15), 
+(17, 'Milwaukee Bucks', 1968, 'Milwaukee', 17, 17),
+(12, 'Indiana Pacers', 1976, 'Indianapolis', 12, 12), 
+(20, 'New York Knicks', 1946, 'New York', 20, 20),
+(8, 'Denver Nuggets', 1976, 'Denver', 8, 8), 
+(18, 'Minnesota Timberwolves', 1989, 'Minneapolis', 18, 18),
+(23, 'Philadelphia 76ers', 1963, 'Philadelphia', 23, 23), 
+(19, 'New Orleans Pelicans', 2013, 'New Orleans', 19, 19), 
+(7, 'Dallas Mavericks', 1980, 'Dallas', 7, 7),
+(24, 'Phoenix Suns', 1968, 'Phoenix', 24, 24),
+(13, 'Los Angeles Clippers', 1984, 'Los Angeles', 13, 13), 
+(25, 'Portland Trail Blazers', 1970, 'Portland', 25, 25),
+(3, 'Brooklyn Nets', 2012, 'Brooklyn', 3, 3), 
+(30, 'Washington Wizards', 1997, 'Washington', 30, 30), 
+(4, 'Chicago Bulls', 1966, 'Chicago', 4, 4),
+(27, 'San Antonio Spurs', 1976, 'San Antonio', 27, 27), 
+(28, 'Toronto Raptors', 1995, 'Toronto', 28, 28),
+(6, 'Cleveland Cavaliers', 1970, 'Cleveland', 6, 6),
+(22, 'Orlando Magic', 1989, 'Orlando', 22, 22),
+(5, 'Charlotte Hornets', 1988, 'Charlotte', 5, 5),
+(11, 'Houston Rockets', 1971, 'Houston', 11, 11), 
+(9, 'Detroit Pistons', 1957, 'Detroit', 9, 9), 
+(16, 'Miami Heat', 1988, 'Miami', 16, 16)
