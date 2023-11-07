@@ -7,7 +7,7 @@ VALUES
 (1, 'Atlanta Hawks', 1968, 'Atlanta', 1, 1), 
 (2, 'Boston Celtics', 1946, 'Boston', 2, 2),
 (21, 'Oklahoma City Thunder', 2008, 'Oklahoma City', 21, 21), 
-(14, 'Los Angeles Lakers', 1960, 'Los Angeles', 14, 14), 
+(14, 'Los Angeles Lakers', 1960, 'Los Angeles', 14, 13), 
 (29, 'Utah Jazz', 1979, 'Salt Lake City', 29, 29), 
 (15, 'Memphis Grizzlies', 2001, 'Memphis', 15, 15), 
 (17, 'Milwaukee Bucks', 1968, 'Milwaukee', 17, 17),
