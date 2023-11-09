@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS coaches (
     c_startyear date not null,
     c_numofchamp int
 );
+
 INSERT INTO coaches (c_coachid, c_name, c_startyear, c_numofchamp) VALUES (1, 'Quin Snyder', 1992, 0);
 INSERT INTO coaches (c_coachid, c_name, c_startyear, c_numofchamp) VALUES (2, 'Joe Mazzulla', 2019, 0);
 INSERT INTO coaches (c_coachid, c_name, c_startyear, c_numofchamp) VALUES (3, 'Jacque Vaughn', 2010, 0);
@@ -45,7 +46,16 @@ INSERT INTO coaches (c_coachid, c_name, c_startyear, c_numofchamp) VALUES (29, '
 INSERT INTO coaches (c_coachid, c_name, c_startyear, c_numofchamp) VALUES (30, 'Wes Unseld', 2005, 0);
 
 -- Table: games
-CREATE TABLE IF NOT EXISTS games (g_gameid INTEGER PRIMARY KEY, g_home INTEGER, g_away INTEGER, g_date TEXT, g_winner INTEGER, g_score TEXT, g_stadium INTEGER);
+CREATE TABLE IF NOT EXISTS games (
+    g_gameid INTEGER PRIMARY KEY, 
+    g_home INTEGER, 
+    g_away INTEGER, 
+    g_date TEXT, 
+    g_winner INTEGER, 
+    g_score TEXT, 
+    g_stadium INTEGER
+);
+
 INSERT INTO games (g_gameid, g_home, g_away, g_date, g_winner, g_score, g_stadium) VALUES (1, 2, 23, '2022-10-18', 2, '126(H) - 117(A)', 2);
 INSERT INTO games (g_gameid, g_home, g_away, g_date, g_winner, g_score, g_stadium) VALUES (2, 10, 14, '2022-10-18', 10, '123(H) - 109(A)', 10);
 INSERT INTO games (g_gameid, g_home, g_away, g_date, g_winner, g_score, g_stadium) VALUES (3, 9, 22, '2022-10-19', 9, '113(H) - 109(A)', 9);
@@ -1368,7 +1378,25 @@ INSERT INTO games (g_gameid, g_home, g_away, g_date, g_winner, g_score, g_stadiu
 INSERT INTO games (g_gameid, g_home, g_away, g_date, g_winner, g_score, g_stadium) VALUES (1320, 8, 16, '2023-06-12', 8, '94(H) - 89(A)', 8);
 
 -- Table: Player
-CREATE TABLE IF NOT EXISTS Player (p_playerid INTEGER PRIMARY KEY, p_name TEXT, p_teamname TEXT, p_teamid INTEGER, p_position INTEGER, p_height REAL, p_weight INTEGER, p_ppg REAL, p_rpg REAL, p_apg REAL, p_spg REAL, p_bpg REAL, p_FGpercent REAL, p_3ppercent REAL, p_startyear INTEGER, p_salary INTEGER);
+CREATE TABLE IF NOT EXISTS player (
+    p_playerid INTEGER PRIMARY KEY, 
+    p_name TEXT, 
+    p_teamname TEXT, 
+    p_teamid INTEGER, 
+    p_position INTEGER, 
+    p_height REAL, 
+    p_weight INTEGER, 
+    p_ppg REAL, 
+    p_rpg REAL, 
+    p_apg REAL, 
+    p_spg REAL, 
+    p_bpg REAL, 
+    p_FGpercent REAL, 
+    p_3Ppercent REAL, 
+    p_startyear INTEGER, 
+    p_salary INTEGER
+);
+
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (1, 'Dejounte Murray', 'ATL-Hawks', 1, 2, 6.04, 180, 20.5, 5.3, 6.1, 1.5, 0.3, 0.464, 0.344, 2017, 16571120);
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (2, 'Trae Young', 'ATL-Hawks', 1, 1, 6.01, 164, 26.2, 3.0, 10.2, 1.1, 0.1, 0.429, 0.335, 2018, 37096500);
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (3, 'De''Andre Hunter', 'ATL-Hawks', 1, 3, 6.08, 225, 15.4, 4.2, 1.4, 0.5, 0.3, 0.461, 0.35, 2019, 9835881);
@@ -1472,7 +1500,7 @@ INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_heig
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (101, 'Kevin Porter Jr.', 'HOU-Rockets', 11, 1, 6.04, 203, 19.2, 5.3, 5.7, 1.4, 0.3, 0.442, 0.366, 2019, 3217631);
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (102, 'Jalen Green', 'HOU-Rockets', 11, 2, 6.04, 178, 22.1, 3.7, 3.7, 0.8, 0.2, 0.416, 0.338, 2021, 9441840);
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (103, 'Jabari Smith Jr.', 'HOU-Rockets', 11, 4, 6.1, 220, 12.8, 7.2, 1.3, 0.5, 0.9, 0.408, 0.307, 2022, 8882640);
-INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (104, 'Alperen Sengün', 'HOU-Rockets', 11, 5, 6.09, 235, 14.8, 9.0, 3.9, 0.9, 0.9, 0.553, 0.333, 2021, 3375360);
+INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (104, 'Alperen Sengï¿½n', 'HOU-Rockets', 11, 5, 6.09, 235, 14.8, 9.0, 3.9, 0.9, 0.9, 0.553, 0.333, 2021, 3375360);
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (105, 'KJ Martin', 'HOU-Rockets', 11, 3, 6.06, 215, 12.7, 5.5, 1.5, 0.5, 0.4, 0.569, 0.315, 2020, 1782621);
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (106, 'Jae''Sean Tate', 'HOU-Rockets', 11, 3, 6.04, 230, 9.1, 3.8, 2.7, 0.7, 0.2, 0.48, 0.283, 2020, 7065217);
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (107, 'Tari Eason', 'HOU-Rockets', 11, 4, 6.08, 216, 9.3, 6.0, 1.1, 1.2, 0.6, 0.448, 0.343, 2022, 3359160);
@@ -1502,7 +1530,7 @@ INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_heig
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (131, 'LeBron James', 'LAL-Lakers', 14, 4, 6.09, 250, 28.9, 8.3, 6.8, 0.9, 0.6, 0.5, 0.321, 2003, 44474988);
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (132, 'Anthony Davis', 'LAL-Lakers', 14, 5, 6.1, 253, 25.9, 12.5, 2.6, 1.1, 2.0, 0.563, 0.257, 2012, 37980720);
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (133, 'D''Angelo Russell', 'LAL-Lakers', 14, 1, 6.04, 193, 17.4, 2.9, 6.1, 0.6, 0.5, 0.484, 0.414, 2015, 31377750);
-INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (134, 'Dennis Schröder', 'LAL-Lakers', 14, 1, 6.03, 172, 12.6, 2.5, 4.5, 0.8, 0.2, 0.415, 0.329, 2013, 1836090);
+INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (134, 'Dennis Schrï¿½der', 'LAL-Lakers', 14, 1, 6.03, 172, 12.6, 2.5, 4.5, 0.8, 0.2, 0.415, 0.329, 2013, 1836090);
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (135, 'Austin Reaves', 'LAL-Lakers', 14, 2, 6.05, 206, 13.0, 3.0, 3.4, 0.5, 0.3, 0.529, 0.398, 2021, 1563518);
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (136, 'Troy Brown Jr.', 'LAL-Lakers', 14, 3, 6.06, 215, 7.1, 4.1, 1.3, 0.8, 0.2, 0.43, 0.381, 2018, 1836090);
 INSERT INTO Player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (137, 'Jarred Vanderbilt', 'LAL-Lakers', 14, 4, 6.09, 214, 7.2, 6.7, 1.6, 1.2, 0.2, 0.529, 0.303, 2018, 4374000);
@@ -1677,6 +1705,7 @@ CREATE TABLE IF NOT EXISTS stadium (
     st_size int,
     st_location varchar(50)
 );
+
 INSERT INTO stadium (st_stadiumid, st_name, st_size, st_location) VALUES (26, 'Golden 1 Center', 17608, 'Sacramento');
 INSERT INTO stadium (st_stadiumid, st_name, st_size, st_location) VALUES (10, 'Chase Center', 18064, 'San Francisco');
 INSERT INTO stadium (st_stadiumid, st_name, st_size, st_location) VALUES (1, 'State Farm Arena', 16600, 'Atlanta');
@@ -1708,7 +1737,15 @@ INSERT INTO stadium (st_stadiumid, st_name, st_size, st_location) VALUES (9, 'Li
 INSERT INTO stadium (st_stadiumid, st_name, st_size, st_location) VALUES (16, 'Kaseya Center', 19600, 'Miami');
 
 -- Table: team
-CREATE TABLE IF NOT EXISTS team (t_teamid identity (1, 1) PRIMARY KEY, t_name varchar (50), t_foundyear date NOT NULL, t_city varchar (50), t_coachid int, t_stadiumid int);
+CREATE TABLE IF NOT EXISTS team (
+    t_teamid identity (1, 1) PRIMARY KEY, 
+    t_name varchar (50), 
+    t_foundyear date NOT NULL, 
+    t_city varchar (50), 
+    t_coachid int, 
+    t_stadiumid int
+);
+
 INSERT INTO team (t_teamid, t_name, t_foundyear, t_city, t_coachid, t_stadiumid) VALUES (26, 'Sacramento Kings', 1985, 'Sacramento', 26, 26);
 INSERT INTO team (t_teamid, t_name, t_foundyear, t_city, t_coachid, t_stadiumid) VALUES (10, 'Golden State Warriors', 1971, 'San Francisco', 10, 10);
 INSERT INTO team (t_teamid, t_name, t_foundyear, t_city, t_coachid, t_stadiumid) VALUES (1, 'Atlanta Hawks', 1968, 'Atlanta', 1, 1);
