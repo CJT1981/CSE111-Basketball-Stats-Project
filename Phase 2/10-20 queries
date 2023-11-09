@@ -1,0 +1,15 @@
+/*
+10. What are the highest assist per game for the top 10 scorers?
+*/
+
+SELECT 
+    p_name AS PlayerName,
+    p_ppg AS PointsPerGame
+FROM (
+    SELECT *
+    FROM Player AS p
+    WHERE p.p_startyear = 2022
+    ORDER BY p.p_ppg DESC
+    LIMIT 10
+) AS Rookies
+ORDER BY p_ppg DESC;
