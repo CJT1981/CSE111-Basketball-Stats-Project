@@ -2,6 +2,7 @@
 1. Find the number of coaches that have won at least 1 championship in their career.
 */
 
+.headers on
 SELECT count(*) as coach_cnt
 FROM coaches
 WHERE c_numofchamp > 0;
@@ -90,8 +91,8 @@ LIMIT 1;
 8. Out of all the transactions happened on July 6, 2022, how many of them were "Trade" type. 
 */
 
-SELECT n_type, n_date, count(*) as n_cnt
-FROM "player news"
+SELECT n_date, n_type, count(*) as n_cnt
+FROM news
 WHERE n_type = 'Trade'
 AND n_date = '2022-07-06';
 
@@ -157,7 +158,7 @@ ORDER BY total_salary DESC;
 
 
 /*
-13. What are the five most common final scores in the database? 
+13. What are the five most common final scores during the season? 
 Show the score and the number of games that ended with that score.
 */
 
@@ -171,7 +172,7 @@ LIMIT 5;
 
 /*
 14. Does the average height of players on a team correlate with the number of wins? 
-Show team names along with average height and win count.
+Show team names, average height, and win count.
 */
 
 SELECT t_name, AVG(p_height) AS AverageHeight, SUM(CASE WHEN g_winner = t_teamid THEN 1 ELSE 0 END) AS Wins
@@ -182,8 +183,7 @@ GROUP BY t_name;
 
 
 /*
-15. Which team has the best win-to-salary ratio, indicating efficient budget spending? 
-List the team name and the calculated ratio.
+15. Which team has the best win-to-salary ratio? List the team name and the efficiency ratio.
 */
 
 SELECT
@@ -199,4 +199,82 @@ GROUP BY t_name
 ORDER BY EfficiencyRatio DESC
 LIMIT 1;
 
+
+
+/*
+16. What are the 10 highest scorers among rookies in 2022?
+*/
+
+SELECT 
+    p_name AS PlayerName,
+    p_ppg AS PointsPerGame
+FROM (
+    SELECT *
+    FROM Player AS p
+    WHERE p.p_startyear = 2022
+    ORDER BY p.p_ppg DESC
+    LIMIT 10
+) AS Rookies
+ORDER BY p_ppg DESC;
+
+
+
+/*
+17. What are the top 10 highest scoring teams in the NBA?
+*/
+SELECT
+    TeamName,
+    ROUND(TotalPoints, 1) AS TotalPoints
+FROM (
+    SELECT
+        p_teamname AS TeamName,
+        SUM(p_ppg) AS TotalPoints
+    FROM Player
+    GROUP BY p_teamid
+) AS TeamPoints
+ORDER BY TotalPoints DESC
+LIMIT 10;
+
+
+
+/*
+18. What three teams have the highest 3pt percentage?
+*/
+
+SELECT
+    t_name AS TeamName,
+    ROUND(SUM(s_3P)/SUM(s_3PA), 3) AS ThreePtPct
+FROM shots AS s, team AS t, player AS p
+WHERE 
+    p.p_playerid = s.s_playerid AND
+    p.p_teamid = t.t_teamid
+GROUP BY TeamName
+ORDER BY ThreePtPct DESC
+LIMIT 3;
+
+
+
+/*
+19. What centers shot above 40% from 3 and 80% from FT?
+*/
+
+SELECT
+    p_name AS PlayerName,
+    s_3PPCT AS ThreePointPercentage,
+    s_FTPCT AS FreeThrowPercentage
+FROM player AS p
+JOIN shots AS s ON p.p_playerid = s.s_playerid
+WHERE
+    p.p_position = 5 AND
+    s.s_3PPCT > 0.35 AND
+    s.s_FTPCT > 0.70 AND
+    s.s_playerid IN (
+        SELECT
+            s_playerid
+        FROM player AS p
+        WHERE
+            p.p_position = 5  
+)
+ORDER BY s_3PPCT DESC
+LIMIT 10;
 
