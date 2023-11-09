@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS coaches (
     c_startyear date not null,
     c_numofchamp int
 );
+
 INSERT INTO coaches (c_coachid, c_name, c_startyear, c_numofchamp) VALUES (1, 'Quin Snyder', 1992, 0);
 INSERT INTO coaches (c_coachid, c_name, c_startyear, c_numofchamp) VALUES (2, 'Joe Mazzulla', 2019, 0);
 INSERT INTO coaches (c_coachid, c_name, c_startyear, c_numofchamp) VALUES (3, 'Jacque Vaughn', 2010, 0);
@@ -45,7 +46,16 @@ INSERT INTO coaches (c_coachid, c_name, c_startyear, c_numofchamp) VALUES (29, '
 INSERT INTO coaches (c_coachid, c_name, c_startyear, c_numofchamp) VALUES (30, 'Wes Unseld', 2005, 0);
 
 -- Table: games
-CREATE TABLE IF NOT EXISTS games (g_gameid INTEGER PRIMARY KEY, g_home INTEGER, g_away INTEGER, g_date TEXT, g_winner INTEGER, g_score TEXT, g_stadium INTEGER);
+CREATE TABLE IF NOT EXISTS games (
+    g_gameid INTEGER PRIMARY KEY, 
+    g_home INTEGER, 
+    g_away INTEGER, 
+    g_date TEXT, 
+    g_winner INTEGER, 
+    g_score TEXT, 
+    g_stadium INTEGER
+);
+
 INSERT INTO games (g_gameid, g_home, g_away, g_date, g_winner, g_score, g_stadium) VALUES (1, 2, 23, '2022-10-18', 2, '126(H) - 117(A)', 2);
 INSERT INTO games (g_gameid, g_home, g_away, g_date, g_winner, g_score, g_stadium) VALUES (2, 10, 14, '2022-10-18', 10, '123(H) - 109(A)', 10);
 INSERT INTO games (g_gameid, g_home, g_away, g_date, g_winner, g_score, g_stadium) VALUES (3, 9, 22, '2022-10-19', 9, '113(H) - 109(A)', 9);
@@ -1368,13 +1378,19 @@ INSERT INTO games (g_gameid, g_home, g_away, g_date, g_winner, g_score, g_stadiu
 INSERT INTO games (g_gameid, g_home, g_away, g_date, g_winner, g_score, g_stadium) VALUES (1320, 8, 16, '2023-06-12', 8, '94(H) - 89(A)', 8);
 
 -- Table: news
-CREATE TABLE IF NOT EXISTS news (n_newsid INTEGER PRIMARY KEY, n_type TEXT, n_date TEXT, n_news TEXT);
+CREATE TABLE IF NOT EXISTS news (
+    n_newsid INTEGER PRIMARY KEY, 
+    n_type TEXT, 
+    n_date TEXT, 
+    n_news TEXT
+);
+
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (1, 'Signing', '2022-06-12', 'Jalen Brunson signed a 4-year deal worth $104 million with the New York Knicks');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (2, 'Trade', '2022-07-06', 'The Minnesota Timberwolves traded Malik Beasley, Patrick Beverley, Leandro Bolmaro, Walker Kessler, Jarred Vanderbilt, and five 1st round draft picks to the Utah Jazz for Rudy Gobert.');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (3, 'Trade', '2022-07-06', 'The Detroit Pistons traded Jerami Grant and Ismael Kamagate to the Portland Trail Blazers for Gabriele Procida, a 1st round draft pick, and two 2nd round draft picks.');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (4, 'Trade', '2022-07-06', 'The Denver Nuggets traded Will Barton and Monte Morris to the Washington Wizards for Kentavious Caldwell-Pope and Ish Smith.');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (5, 'Trade', '2022-07-06', 'The Atlanta Hawks traded Kevin Huerter to the Sacramento Kings for Maurice Harkless, Justin Holiday and a 2024 1st round draft pick');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (6, 'Trade', '2022-07-06', 'The Detroit Pistons traded a 1st round draft pick to the New York Knicks for Jalen Duren and Kemba Walker');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (2, 'Trade', '2022-07-06', 'Theï¿½Minnesota Timberwolvesï¿½tradedï¿½Malik Beasley,ï¿½Patrick Beverley,ï¿½Leandro Bolmaro,ï¿½Walker Kessler,ï¿½Jarred Vanderbilt, and five 1st round draft picks to theï¿½Utah Jazzï¿½forï¿½Rudy Gobert.');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (3, 'Trade', '2022-07-06', 'Theï¿½Detroit Pistonsï¿½tradedï¿½Jerami Grantï¿½andï¿½Ismael Kamagateï¿½to theï¿½Portland Trail Blazersï¿½forï¿½Gabriele Procida, a 1st round draft pick, and two 2nd round draft picks.');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (4, 'Trade', '2022-07-06', 'Theï¿½Denver Nuggetsï¿½tradedï¿½Will Bartonï¿½andï¿½Monte Morrisï¿½to theï¿½Washington Wizardsï¿½forï¿½Kentavious Caldwell-Popeï¿½andï¿½Ish Smith.');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (5, 'Trade', '2022-07-06', 'Theï¿½Atlanta Hawksï¿½tradedï¿½Kevin Huerterï¿½to theï¿½Sacramento Kingsï¿½forï¿½Maurice Harkless,ï¿½Justin Holidayï¿½and a 2024 1st round draft pick');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (6, 'Trade', '2022-07-06', 'Theï¿½Detroit Pistonsï¿½traded a 1st round draft pick to theï¿½New York Knicksï¿½forï¿½Jalen Durenï¿½andï¿½Kemba Walker');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (7, 'Extension', '2022-07-06', 'Bradley Beal signed a 5-year extension worth $251 million with the Washington Wizards');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (8, 'Extension', '2022-07-06', 'Anfernee Simons signed a 4-year extension worth $100 million with the Portland Trailblazers');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (9, 'Signing', '2022-07-06', 'Gary Payton ll signed a 3-year deal worth $28 million with the Portland Trailblazers');
@@ -1389,26 +1405,26 @@ INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (17, 'Extension', '20
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (18, 'Signing', '2022-07-07', 'Bruce Brown signed a 2-year deal worth $13 million with the Denver Nuggets');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (19, 'Extension', '2022-07-07', 'Karl-Anthony Towns signed a 4-year extension worth $224 million with the Minnesota Timberwolves');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (20, 'Extension', '2022-07-08', 'Nikola Jokic signed a 5-year extension worth $272 million with the Denver Nuggets ');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (21, 'Trade', '2022-07-09', 'The Boston Celtics traded Malik Fitts, Juwan Morgan, Aaron Nesmith, Nik Stauskas, Daniel Theis, and a 1st round draft pick to the Indiana Pacers for Malcolm Brogdon.');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (21, 'Trade', '2022-07-09', 'Theï¿½Boston Celticsï¿½tradedï¿½Malik Fitts,ï¿½Juwan Morgan,ï¿½Aaron Nesmith,ï¿½Nik Stauskas,ï¿½Daniel Theis, and a 1st round draft pick to theï¿½Indiana Pacersï¿½forï¿½Malcolm Brogdon.');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (22, 'Extension', '2022-07-09', 'Damian Lillard signed a 2-year extension worth $106 million with the Portland Trailblazers');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (23, 'Signing', '2022-07-15', 'Deandre Ayton signed a 4-year deal worth $133 million with the Phoenix Suns');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (24, 'Extension', '2022-07-27', 'James Harden signed a 2-year extension worth $68.6 million with the Philadelphia 76ers');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (25, 'Trade', '2022-09-03', 'The Cleveland Cavaliers traded Ochai Agbaji, Lauri Markkanen, Collin Sexton, and five 1st round draft picks to the Utah Jazz for Donovan Mitchell.');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (26, 'Trade', '2022-09-22', 'The Detroit Pistons traded Saben Lee and Kelly Olynyk to the Utah Jazz for Bojan Bogdanovic.');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (25, 'Trade', '2022-09-03', 'Theï¿½Cleveland Cavaliersï¿½tradedï¿½Ochai Agbaji,ï¿½Lauri Markkanen,ï¿½Collin Sexton, and five 1st round draft picks to theï¿½Utah Jazzï¿½forï¿½Donovan Mitchell.');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (26, 'Trade', '2022-09-22', 'Theï¿½Detroit Pistonsï¿½tradedï¿½Saben Leeï¿½andï¿½Kelly Olynykï¿½to theï¿½Utah Jazzï¿½forï¿½Bojan Bogdanovic.');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (27, 'Suspension', '2022-10-23', 'Caleb Martin and Nikola Jovic were suspended for 1 game');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (28, 'Extension', '2022-10-30', 'Bojan Bogdanovic signed a 2-year extension worth $39 million with the Detroit Pistons');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (29, 'Trade', '2023-01-23', 'The Los Angeles Lakers traded Kendrick Nunn, and three 2nd round draft picks to the Washington Wizards for Rui Hachimura.');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (29, 'Trade', '2023-01-23', 'Theï¿½Los Angeles Lakersï¿½tradedï¿½Kendrick Nunn, and three 2nd round draft picks to theï¿½Washington Wizardsï¿½forï¿½Rui Hachimura.');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (30, 'Extension', '2023-01-30', 'Myles Turner signed a 2-year extension worth $40 million with the Indiana Pacers');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (31, 'Trade', '2023-02-06', 'The Brooklyn Nets traded Kyrie Irving and Markieff Morris to the Dallas Mavericks for Spencer Dinwiddie, Dorian Finney-Smith, two 2nd round draft picks, and a 1st round draft pick ');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (31, 'Trade', '2023-02-06', 'Theï¿½Brooklyn Netsï¿½tradedï¿½Kyrie Irvingï¿½andï¿½Markieff Morrisï¿½to theï¿½Dallas Mavericksï¿½forï¿½Spencer Dinwiddie,ï¿½Dorian Finney-Smith, two 2nd round draft picks, and a 1st round draft pick ');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (32, 'Trade', '2023-02-09', 'The Charlotte Hornets traded Mason Plumlee to the Los Angeles Clippers for Reggie Jackson and a 2nd round draft pick');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (33, 'Trade', '2023-02-09', 'Charlotte Hornets traded Jalen McDaniels and a 2nd round draft pick to the Philadelphia 76ers; the New York Knicks traded Sviatoslav Mykhailiuk to the Charlotte Hornets; the New York Knicks traded Ryan Arcidiacono, Cam Reddish, Ante Tomic, and a 1st round draft pick to the Portland Trail Blazers; the Philadelphia 76ers traded a 2023 2nd round draft pick to the Charlotte Hornets; the Philadelphia 76ers traded Matisse Thybulle to the Portland Trail Blazers; the Portland Trail Blazers traded a 2nd round draft pick to the Charlotte Hornets; the Portland Trail Blazers traded Dani Diez, Bojan Dubljevic and Josh Hart to the New York Knicks; and the Portland Trail Blazers traded a 2nd round draft pick to the Philadelphia 76ers. ');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (34, 'Trade', '2023-02-09', 'The Houston Rockets traded Eric Gordon and a 1st round draft pick to the Los Angeles Clippers; the Los Angeles Clippers traded John Wall and a 2023 1st round draft pick to the Houston Rockets; the Los Angeles Clippers traded Luke Kennard and a 2nd round draft pick to the Memphis Grizzlies; the Memphis Grizzlies traded Danny Green to the Houston Rockets; and the Memphis Grizzlies traded a three 2nd round draft pick to the Los Angeles Clippers.');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (35, 'Trade', '2023-02-09', 'The Boston Celtics traded Justin Jackson, and two 2nd round draft picks to the Oklahoma City Thunder for Mike Muscala.');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (36, 'Trade', '2023-02-09', 'The New Orleans Pelicans traded Devonte Graham, and four 2nd round draft picks to the San Antonio Spurs for Josh Richardson.');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (37, 'Trade', '2023-02-09', 'In a 4-team trade, the Atlanta Hawks traded two 2nd round draft picks to the Golden State Warriors; the Atlanta Hawks traded a three 2nd round draft picks to the Portland Trail Blazers; the Detroit Pistons traded Saddiq Bey to the Atlanta Hawks; the Detroit Pistons traded Kevin Knox to the Portland Trail Blazers; the Golden State Warriors traded James Wiseman to the Detroit Pistons; the Golden State Warriors traded two 2nd round draft picks to the Portland Trail Blazers; and the Portland Trail Blazers traded Gary Payton II to the Golden State Warriors.');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (34, 'Trade', '2023-02-09', 'Theï¿½Houston Rocketsï¿½tradedï¿½Eric Gordonï¿½and a 1st round draft pick to theï¿½Los Angeles Clippers; theï¿½Los Angeles Clippersï¿½tradedï¿½John Wallï¿½and a 2023 1st round draft pick to theï¿½Houston Rockets; theï¿½Los Angeles Clippersï¿½tradedï¿½Luke Kennardï¿½and a 2nd round draft pick to theï¿½Memphis Grizzlies; theï¿½Memphis Grizzliesï¿½tradedï¿½Danny Greenï¿½to theï¿½Houston Rockets; and theï¿½Memphis Grizzliesï¿½traded a three 2nd round draft pick to theï¿½Los Angeles Clippers.');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (35, 'Trade', '2023-02-09', 'Theï¿½Boston Celticsï¿½tradedï¿½Justin Jackson, and two 2nd round draft picks to theï¿½Oklahoma City Thunderï¿½forï¿½Mike Muscala.');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (36, 'Trade', '2023-02-09', 'Theï¿½New Orleans Pelicansï¿½tradedï¿½Devonte Graham, and four 2nd round draft picks to theï¿½San Antonio Spursï¿½forï¿½Josh Richardson.');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (37, 'Trade', '2023-02-09', 'In a 4-team trade, theï¿½Atlanta Hawksï¿½traded two 2nd round draft picks to theï¿½Golden State Warriors; theï¿½Atlanta Hawksï¿½traded a three 2nd round draft picks to theï¿½Portland Trail Blazers; theï¿½Detroit Pistonsï¿½tradedï¿½Saddiq Beyï¿½to theï¿½Atlanta Hawks; theï¿½Detroit Pistonsï¿½tradedï¿½Kevin Knoxï¿½to theï¿½Portland Trail Blazers; theï¿½Golden State Warriorsï¿½tradedï¿½James Wisemanï¿½to theï¿½Detroit Pistons; theï¿½Golden State Warriorsï¿½traded two 2nd round draft picks to theï¿½Portland Trail Blazers; and theï¿½Portland Trail Blazersï¿½tradedï¿½Gary Payton IIï¿½to theï¿½Golden State Warriors.');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (38, 'Trade', '2023-02-09', 'In a 4-team trade, the Brooklyn Nets traded Kevin Durant and T.J. Warren to the Phoenix Suns; the Indiana Pacers traded Juan Vaulet to the Brooklyn Nets; the Milwaukee Bucks traded two 2nd round draft picks to the Brooklyn Nets; the Milwaukee Bucks traded George Hill, Serge Ibaka, Jordan Nwora, and three 2nd round draft picks to the Indiana Pacers; the Phoenix Suns traded Mikal Bridges, Cameron Johnson, and five 1st round draft picks to the Brooklyn Nets; and the Phoenix Suns traded Jae Crowder to the Milwaukee Bucks.');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (39, 'Trade', '2023-02-09', 'In a 4-team trade, the Denver Nuggets traded Bones Hyland to the Los Angeles Clippers; the Denver Nuggets traded Davon Reed to the Los Angeles Lakers; the Denver Nuggets traded a 2nd round draft pick to the Orlando Magic; the Los Angeles Clippers traded two 2nd round draft picks to the Los Angeles Lakers; the Los Angeles Lakers traded Thomas Bryant to the Denver Nuggets; the Los Angeles Lakers traded Patrick Beverley to the Orlando Magic; and the Orlando Magic traded Mo Bamba to the Los Angeles Lakers.');
-INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (40, 'Trade', '2023-02-09', 'In a 3-team trade, the Los Angeles Lakers traded a 2nd round draft pick to the Minnesota Timberwolves; the Los Angeles Lakers traded Damian Jones, Juan Toscano-Anderson, Russell Westbrook, and a 1st round draft pick to the Utah Jazz; the Minnesota Timberwolves traded D''Angelo Russell to the Los Angeles Lakers; the Utah Jazz traded Malik Beasley and Jarred Vanderbilt to the Los Angeles Lakers; and the Utah Jazz traded Nickeil Alexander-Walker, Mike Conley, and two 2nd round draft picks to the Minnesota Timberwolves.');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (39, 'Trade', '2023-02-09', 'In a 4-team trade, theï¿½Denver Nuggetsï¿½tradedï¿½Bones Hylandï¿½to theï¿½Los Angeles Clippers; theï¿½Denver Nuggetsï¿½tradedï¿½Davon Reedï¿½to theï¿½Los Angeles Lakers; theï¿½Denver Nuggetsï¿½traded a 2nd round draft pick to theï¿½Orlando Magic; theï¿½Los Angeles Clippersï¿½traded two 2nd round draft picks to theï¿½Los Angeles Lakers; theï¿½Los Angeles Lakersï¿½tradedï¿½Thomas Bryantï¿½to theï¿½Denver Nuggets; theï¿½Los Angeles Lakersï¿½traded Patrick Beverleyï¿½to theï¿½Orlando Magic; and theï¿½Orlando Magicï¿½tradedï¿½Mo Bambaï¿½to theï¿½Los Angeles Lakers.');
+INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (40, 'Trade', '2023-02-09', 'In a 3-team trade, theï¿½Los Angeles Lakersï¿½traded a 2nd round draft pick to theï¿½Minnesota Timberwolves; theï¿½Los Angeles Lakersï¿½tradedï¿½Damian Jones,ï¿½Juan Toscano-Anderson,ï¿½Russell Westbrook, and a 1st round draft pick to theï¿½Utah Jazz; theï¿½Minnesota Timberwolvesï¿½tradedï¿½D''Angelo Russellï¿½to theï¿½Los Angeles Lakers; theï¿½Utah Jazzï¿½tradedï¿½Malik Beasleyï¿½andï¿½Jarred Vanderbiltï¿½to theï¿½Los Angeles Lakers; and theï¿½Utah Jazzï¿½tradedï¿½Nickeil Alexander-Walker,ï¿½Mike Conley, and two 2nd round draft picks to theï¿½Minnesota Timberwolves.');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (41, 'Trade', '2023-02-09', 'The San Antonio Spurs traded Jakob Poeltl to the Toronto Raptors for Khem Birch, two  2nd round draft picks, and a 1st round draft pick.');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (42, 'Signing', '2023-02-14', 'The Denver Nuggets signed Reggie Jackson.');
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (43, 'Signing', '2023-02-14', 'The Phoenix Suns signed Terrence Ross.');
@@ -1423,7 +1439,25 @@ INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (51, 'Suspension', '2
 INSERT INTO news (n_newsid, n_type, n_date, n_news) VALUES (52, 'Suspension', '2023-04-24', 'Dejounte Murray was suspended for 1 game');
 
 -- Table: player
-CREATE TABLE IF NOT EXISTS player (p_playerid INTEGER PRIMARY KEY, p_name TEXT, p_teamname TEXT, p_teamid INTEGER, p_position INTEGER, p_height REAL, p_weight INTEGER, p_ppg REAL, p_rpg REAL, p_apg REAL, p_spg REAL, p_bpg REAL, p_FGpercent REAL, p_3ppercent REAL, p_startyear INTEGER, p_salary INTEGER);
+CREATE TABLE IF NOT EXISTS player (
+    p_playerid INTEGER PRIMARY KEY, 
+    p_name TEXT, 
+    p_teamname TEXT, 
+    p_teamid INTEGER, 
+    p_position INTEGER,
+    p_height REAL, 
+    p_weight INTEGER, 
+    p_ppg REAL, 
+    p_rpg REAL, 
+    p_apg REAL, 
+    p_spg REAL, 
+    p_bpg REAL, 
+    p_FGpercent REAL, 
+    p_3ppercent REAL, 
+    p_startyear INTEGER, 
+    p_salary INTEGER
+);
+
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (1, 'Dejounte Murray', 'ATL-Hawks', 1, 2, 6.04, 180, 20.5, 5.3, 6.1, 1.5, 0.3, 0.464, 0.344, 2017, 16571120);
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (2, 'Trae Young', 'ATL-Hawks', 1, 1, 6.01, 164, 26.2, 3.0, 10.2, 1.1, 0.1, 0.429, 0.335, 2018, 37096500);
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (3, 'De''Andre Hunter', 'ATL-Hawks', 1, 3, 6.08, 225, 15.4, 4.2, 1.4, 0.5, 0.3, 0.461, 0.35, 2019, 9835881);
@@ -1527,7 +1561,7 @@ INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_heig
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (101, 'Kevin Porter Jr.', 'HOU-Rockets', 11, 1, 6.04, 203, 19.2, 5.3, 5.7, 1.4, 0.3, 0.442, 0.366, 2019, 3217631);
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (102, 'Jalen Green', 'HOU-Rockets', 11, 2, 6.04, 178, 22.1, 3.7, 3.7, 0.8, 0.2, 0.416, 0.338, 2021, 9441840);
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (103, 'Jabari Smith Jr.', 'HOU-Rockets', 11, 4, 6.1, 220, 12.8, 7.2, 1.3, 0.5, 0.9, 0.408, 0.307, 2022, 8882640);
-INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (104, 'Alperen Sengün', 'HOU-Rockets', 11, 5, 6.09, 235, 14.8, 9.0, 3.9, 0.9, 0.9, 0.553, 0.333, 2021, 3375360);
+INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (104, 'Alperen Sengï¿½n', 'HOU-Rockets', 11, 5, 6.09, 235, 14.8, 9.0, 3.9, 0.9, 0.9, 0.553, 0.333, 2021, 3375360);
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (105, 'KJ Martin', 'HOU-Rockets', 11, 3, 6.06, 215, 12.7, 5.5, 1.5, 0.5, 0.4, 0.569, 0.315, 2020, 1782621);
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (106, 'Jae''Sean Tate', 'HOU-Rockets', 11, 3, 6.04, 230, 9.1, 3.8, 2.7, 0.7, 0.2, 0.48, 0.283, 2020, 7065217);
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (107, 'Tari Eason', 'HOU-Rockets', 11, 4, 6.08, 216, 9.3, 6.0, 1.1, 1.2, 0.6, 0.448, 0.343, 2022, 3359160);
@@ -1557,7 +1591,7 @@ INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_heig
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (131, 'LeBron James', 'LAL-Lakers', 14, 4, 6.09, 250, 28.9, 8.3, 6.8, 0.9, 0.6, 0.5, 0.321, 2003, 44474988);
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (132, 'Anthony Davis', 'LAL-Lakers', 14, 5, 6.1, 253, 25.9, 12.5, 2.6, 1.1, 2.0, 0.563, 0.257, 2012, 37980720);
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (133, 'D''Angelo Russell', 'LAL-Lakers', 14, 1, 6.04, 193, 17.4, 2.9, 6.1, 0.6, 0.5, 0.484, 0.414, 2015, 31377750);
-INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (134, 'Dennis Schröder', 'LAL-Lakers', 14, 1, 6.03, 172, 12.6, 2.5, 4.5, 0.8, 0.2, 0.415, 0.329, 2013, 1836090);
+INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (134, 'Dennis Schrï¿½der', 'LAL-Lakers', 14, 1, 6.03, 172, 12.6, 2.5, 4.5, 0.8, 0.2, 0.415, 0.329, 2013, 1836090);
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (135, 'Austin Reaves', 'LAL-Lakers', 14, 2, 6.05, 206, 13.0, 3.0, 3.4, 0.5, 0.3, 0.529, 0.398, 2021, 1563518);
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (136, 'Troy Brown Jr.', 'LAL-Lakers', 14, 3, 6.06, 215, 7.1, 4.1, 1.3, 0.8, 0.2, 0.43, 0.381, 2018, 1836090);
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (137, 'Jarred Vanderbilt', 'LAL-Lakers', 14, 4, 6.09, 214, 7.2, 6.7, 1.6, 1.2, 0.2, 0.529, 0.303, 2018, 4374000);
@@ -1726,7 +1760,24 @@ INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_heig
 INSERT INTO player (p_playerid, p_name, p_teamname, p_teamid, p_position, p_height, p_weight, p_ppg, p_rpg, p_apg, p_spg, p_bpg, p_FGpercent, p_3ppercent, p_startyear, p_salary) VALUES (300, 'Jordan Goodwin', 'WAS-Wizards', 30, 1, 6.03, 200, 6.6, 3.3, 2.7, 0.9, 0.4, 0.448, 0.322, 2021, 900000);
 
 -- Table: shots
-CREATE TABLE IF NOT EXISTS shots (s_playerid INTEGER REFERENCES Player (p_playerid), s_playername TEXT, s_FG REAL, s_FGA REAL, s_FGPCT REAL, s_3P REAL, s_3PA REAL, s_3PPCT REAL, s_2P REAL, s_2PA REAL, s_2PPCT REAL, s_eFGPCT REAL, s_FT REAL, s_FTA REAL, s_FTPCT REAL);
+CREATE TABLE IF NOT EXISTS shots (
+    s_playerid INTEGER REFERENCES Player (p_playerid),
+    s_playername TEXT, 
+    s_FG REAL, 
+    s_FGA REAL, 
+    s_FGPCT REAL, 
+    s_3P REAL, 
+    s_3PA REAL, 
+    s_3PPCT REAL, 
+    s_2P REAL, 
+    s_2PA REAL, 
+    s_2PPCT REAL, 
+    s_eFGPCT REAL, 
+    s_FT REAL, 
+    s_FTA REAL, 
+    s_FTPCT REAL
+);
+
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (1, 'Dejounte Murray', 8.3, 17.8, 0.464, 1.8, 5.2, 0.344, 6.5, 12.6, 0.514, 0.514, 2.1, 2.6, 0.832);
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (2, 'Trae Young', 8.2, 19.0, 0.429, 2.1, 6.3, 0.335, 6.1, 12.7, 0.476, 0.485, 7.8, 8.8, 0.886);
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (3, 'De''Andre Hunter', 5.7, 12.3, 0.461, 1.5, 4.3, 0.35, 4.2, 8.0, 0.521, 0.522, 2.6, 3.1, 0.826);
@@ -1830,7 +1881,7 @@ INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, 
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (101, 'Kevin Porter Jr.', 6.6, 15.0, 0.442, 2.4, 6.5, 0.366, 4.2, 8.5, 0.501, 0.522, 3.5, 4.5, 0.784);
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (102, 'Jalen Green', 7.4, 17.9, 0.416, 2.5, 7.3, 0.338, 5.0, 10.6, 0.471, 0.485, 4.8, 6.1, 0.786);
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (103, 'Jabari Smith Jr.', 4.6, 11.3, 0.408, 1.5, 4.9, 0.307, 3.1, 6.3, 0.487, 0.475, 2.1, 2.6, 0.786);
-INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (104, 'Alperen Sengün', 5.9, 10.7, 0.553, 0.3, 0.8, 0.333, 5.6, 9.9, 0.57, 0.565, 2.7, 3.8, 0.715);
+INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (104, 'Alperen Sengï¿½n', 5.9, 10.7, 0.553, 0.3, 0.8, 0.333, 5.6, 9.9, 0.57, 0.565, 2.7, 3.8, 0.715);
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (105, 'KJ Martin', 5.0, 8.8, 0.569, 0.8, 2.6, 0.315, 4.2, 6.1, 0.679, 0.617, 1.8, 2.7, 0.68);
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (106, 'Jae''Sean Tate', 3.5, 7.4, 0.48, 0.4, 1.5, 0.283, 3.1, 5.9, 0.53, 0.509, 1.6, 2.2, 0.725);
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (107, 'Tari Eason', 3.6, 8.0, 0.448, 0.7, 2.1, 0.343, 2.9, 6.0, 0.486, 0.493, 1.3, 1.8, 0.752);
@@ -1860,7 +1911,7 @@ INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, 
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (131, 'LeBron James', 11.1, 22.2, 0.5, 2.2, 6.9, 0.321, 8.9, 15.3, 0.58, 0.549, 4.6, 5.9, 0.768);
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (132, 'Anthony Davis', 9.7, 17.2, 0.563, 0.3, 1.3, 0.257, 9.3, 15.9, 0.589, 0.573, 6.2, 7.9, 0.784);
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (133, 'D''Angelo Russell', 6.3, 13.0, 0.484, 2.7, 6.5, 0.414, 3.6, 6.5, 0.555, 0.588, 2.1, 2.9, 0.735);
-INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (134, 'Dennis Schröder', 4.1, 9.8, 0.415, 1.1, 3.4, 0.329, 3.0, 6.4, 0.461, 0.472, 3.3, 3.8, 0.857);
+INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (134, 'Dennis Schrï¿½der', 4.1, 9.8, 0.415, 1.1, 3.4, 0.329, 3.0, 6.4, 0.461, 0.472, 3.3, 3.8, 0.857);
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (135, 'Austin Reaves', 4.0, 7.7, 0.529, 1.3, 3.4, 0.398, 2.7, 4.3, 0.631, 0.616, 3.6, 4.1, 0.864);
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (136, 'Troy Brown Jr.', 2.6, 6.1, 0.43, 1.4, 3.7, 0.381, 1.2, 2.4, 0.505, 0.545, 0.4, 0.5, 0.872);
 INSERT INTO shots (s_playerid, s_playername, s_FG, s_FGA, s_FGPCT, s_3P, s_3PA, s_3PPCT, s_2P, s_2PA, s_2PPCT, s_eFGPCT, s_FT, s_FTA, s_FTPCT) VALUES (137, 'Jarred Vanderbilt', 2.8, 5.4, 0.529, 0.4, 1.3, 0.303, 2.5, 4.1, 0.598, 0.564, 1.1, 1.4, 0.784);
@@ -2066,7 +2117,15 @@ INSERT INTO stadium (st_stadiumid, st_name, st_size, st_location) VALUES (9, 'Li
 INSERT INTO stadium (st_stadiumid, st_name, st_size, st_location) VALUES (16, 'Kaseya Center', 19600, 'Miami');
 
 -- Table: team
-CREATE TABLE IF NOT EXISTS team (t_teamid identity (1, 1) PRIMARY KEY, t_name varchar (50), t_foundyear date NOT NULL, t_city varchar (50), t_coachid int, t_stadiumid int);
+CREATE TABLE IF NOT EXISTS team (
+    t_teamid identity (1, 1) PRIMARY KEY, 
+    t_name varchar (50), 
+    t_foundyear date NOT NULL, 
+    t_city varchar (50), 
+    t_coachid int, 
+    t_stadiumid int
+);
+
 INSERT INTO team (t_teamid, t_name, t_foundyear, t_city, t_coachid, t_stadiumid) VALUES (26, 'Sacramento Kings', 1985, 'Sacramento', 26, 26);
 INSERT INTO team (t_teamid, t_name, t_foundyear, t_city, t_coachid, t_stadiumid) VALUES (10, 'Golden State Warriors', 1971, 'San Francisco', 10, 10);
 INSERT INTO team (t_teamid, t_name, t_foundyear, t_city, t_coachid, t_stadiumid) VALUES (1, 'Atlanta Hawks', 1968, 'Atlanta', 1, 1);
