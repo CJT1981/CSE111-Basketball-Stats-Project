@@ -288,5 +288,4 @@ WHERE
     t.t_teamid = g.g_away
 GROUP BY TeamName
 ORDER BY TotalAwayWins DESC
-=======
->>>>>>> 9b121d468eaa840a5a5b3217b0f6e0d7d0528e63
+
