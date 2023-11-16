@@ -203,14 +203,6 @@ LIMIT 1;
 16. What are the 10 highest scorers among rookies in 2022?
 */
 
-<<<<<<< HEAD
-=======
-
-/*
-16. What are the 10 highest scorers among rookies in 2022?
-*/
-
->>>>>>> 9b121d468eaa840a5a5b3217b0f6e0d7d0528e63
 SELECT 
     p_name AS PlayerName,
     p_ppg AS PointsPerGame
@@ -223,11 +215,6 @@ FROM (
 ) AS Rookies
 ORDER BY p_ppg DESC;
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 9b121d468eaa840a5a5b3217b0f6e0d7d0528e63
 /*
 17. What are the top 10 highest scoring teams in the NBA?
 */
@@ -244,11 +231,11 @@ FROM (
 ORDER BY TotalPoints DESC
 LIMIT 10;
 
-<<<<<<< HEAD
-=======
+<<<<<<<<< Temporary merge branch 1
 
 
->>>>>>> 9b121d468eaa840a5a5b3217b0f6e0d7d0528e63
+=========
+>>>>>>>>> Temporary merge branch 2
 /*
 18. What three teams have the highest 3pt percentage?
 */
@@ -264,11 +251,6 @@ GROUP BY TeamName
 ORDER BY ThreePtPct DESC
 LIMIT 3;
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 9b121d468eaa840a5a5b3217b0f6e0d7d0528e63
 /*
 19. What centers shot above 40% from 3 and 80% from FT?
 */
@@ -293,7 +275,6 @@ WHERE
 ORDER BY s_3PPCT DESC
 LIMIT 10;
 
-<<<<<<< HEAD
 /*
 20. How many games has a team won as the away team 
 */
@@ -307,5 +288,4 @@ WHERE
     t.t_teamid = g.g_away
 GROUP BY TeamName
 ORDER BY TotalAwayWins DESC
-=======
->>>>>>> 9b121d468eaa840a5a5b3217b0f6e0d7d0528e63
+
