@@ -1,5 +1,5 @@
 --
--- File generated with SQLiteStudio v3.4.4 on Thu Nov 16 09:56:57 2023
+-- File generated with SQLiteStudio v3.4.4 on Sun Nov 19 15:39:01 2023
 --
 -- Text encoding used: System
 --
