@@ -1,4 +1,4 @@
-INSERT INTO team (t_teamid, t_tname, t_foundyear, t_city, t_coachid, t_stadiumid)
+INSERT INTO team (t_teamid, t_name, t_foundyear, t_city, t_coachid, t_stadiumid)
 
 VALUES
 

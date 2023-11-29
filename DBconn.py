@@ -55,10 +55,29 @@ def createTable(_conn):
             g_score TEXT, 
             g_stadium INTEGER);
     """
-
     cursor.execute(create_table_query)
-    _conn.commit()
 
+    create_table_query = """
+    CREATE TABLE IF NOT EXISTS stadium (
+    st_stadiumid identity(1, 1) primary key,
+    st_name varchar(50),
+    st_size int,
+    st_location varchar(50));
+    """
+    cursor.execute(create_table_query)
+
+    create_table_query = """
+    CREATE TABLE IF NOT EXISTS team (
+        t_teamid identity (1, 1) PRIMARY KEY, 
+        t_name varchar (50), 
+        t_foundyear date NOT NULL, 
+        t_city varchar (50), 
+        t_coachid int, 
+        t_stadiumid int);
+    """
+    cursor.execute(create_table_query)
+
+    _conn.commit()
     print("++++++++++++++++++++++++++++++++++")
 
 
@@ -69,6 +88,8 @@ def dropTable(_conn):
     cursor = _conn.cursor()
     cursor.execute("DROP TABLE IF EXISTS coaches")
     cursor.execute("DROP TABLE IF EXISTS game")
+    cursor.execute("DROP TABLE IF EXISTS stadium")
+    cursor.execute("DROP TABLE IF EXISTS team")
     _conn.commit()
 
     print("++++++++++++++++++++++++++++++++++")
@@ -90,7 +111,7 @@ def populateTables(_conn):
     print("++++++++++++++++++++++++++++++++++")
     print("Populate stadium")
     print("++++++++++++++++++++++++++++++++++")
-    insertValues(_conn, 'SQLfile/populate_teams.sql')
+    insertValues(_conn, 'SQLfiles/populate_teams.sql')
     print("++++++++++++++++++++++++++++++++++")
     print("Populate teams")
     print("++++++++++++++++++++++++++++++++++")
