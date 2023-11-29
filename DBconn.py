@@ -17,6 +17,7 @@ def openConnection(_dbFile):
 
     return conn
 
+
 def closeConnection(_conn, _dbFile):
     print("++++++++++++++++++++++++++++++++++")
     print("Close database: ", _dbFile)
@@ -35,16 +36,15 @@ def createTable(_conn):
     print("Create table")
 
     cursor = _conn.cursor()
-    
+
     cursor.execute("DROP TABLE IF EXISTS warehouse")
-    
-    
+
     create_table_query = """CREATE TABLE IF NOT EXISTS coaches (
             c_coachid identity(1, 1) primary key,
             c_name varchar(50),
             c_startyear date not null,
             c_numofchamp int)"""
-    
+
     cursor.execute(create_table_query)
 
     create_table_query = """
@@ -55,7 +55,7 @@ def createTable(_conn):
             g_score TEXT, 
             g_stadium INTEGER);
     """
-    
+
     cursor.execute(create_table_query)
     _conn.commit()
 
@@ -78,15 +78,27 @@ def populateTables(_conn):
     print("++++++++++++++++++++++++++++++++++")
     print("Populate table")
 
-    populateCoaches(_conn, 'SQLfiles/populate_coaches.sql')
-    populateGame(_conn, 'SQLfiles/populate_game.sql')
-    
+    insertValues(_conn, 'SQLfiles/populate_coaches.sql')
+    print("++++++++++++++++++++++++++++++++++")
+    print("Populate coaches")
+    print("++++++++++++++++++++++++++++++++++")
+    insertValues(_conn, 'SQLfiles/populate_game.sql')
+    print("++++++++++++++++++++++++++++++++++")
+    print("Populate game")
+    print("++++++++++++++++++++++++++++++++++")
+    insertValues(_conn, 'SQLfiles/populate_stadium.sql')
+    print("++++++++++++++++++++++++++++++++++")
+    print("Populate stadium")
+    print("++++++++++++++++++++++++++++++++++")
+    insertValues(_conn, 'SQLfile/populate_teams.sql')
+    print("++++++++++++++++++++++++++++++++++")
+    print("Populate teams")
+    print("++++++++++++++++++++++++++++++++++")
+
     print("++++++++++++++++++++++++++++++++++")
 
 
-def populateCoaches(_conn, sql_file):
-    print("++++++++++++++++++++++++++++++++++")
-    print("Populate table")
+def insertValues(_conn, sql_file):
 
     cursor = _conn.cursor()
 
@@ -95,24 +107,6 @@ def populateCoaches(_conn, sql_file):
 
     cursor.executescript(sql_script)
     _conn.commit()
-    
-    print("++++++++++++++++++++++++++++++++++")
-
-
-def populateGame(_conn, sql_file):
-    print("++++++++++++++++++++++++++++++++++")
-    print("Populate table")
-
-    cursor = _conn.cursor()
-
-    with open(sql_file, 'r') as file:
-        sql_script = file.read()
-
-    cursor.executescript(sql_script)
-    _conn.commit()
-    
-    print("++++++++++++++++++++++++++++++++++")
-
 
 
 def main():
@@ -125,7 +119,6 @@ def main():
         createTable(conn)
         populateTables(conn)
 
-    
     closeConnection(conn, database)
 
 

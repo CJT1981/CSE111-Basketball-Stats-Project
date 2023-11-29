@@ -31,4 +31,4 @@ VALUES
 (5, 'Spectrum Center', 785000, 'Charlotte'),
 (11, 'Toyota Center', 750000, 'Houston'),
 (9, 'Little Caesars Arena', 885000, 'Detroit'),
-(16, 'Kaseya Center', 250000, 'Miami'),
+(16, 'Kaseya Center', 250000, 'Miami');
