@@ -3838,8 +3838,8 @@ def main():
     cursor = connection.cursor()
 
     with connection:
-        #createTables(connection)
-        #populateTables(connection)
+        createTables(connection)
+        populateTables(connection)
 
         closeConnection(connection, database)
 
