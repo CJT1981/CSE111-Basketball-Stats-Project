@@ -130,6 +130,37 @@ def insertValues(_conn, sql_file):
     _conn.commit()
 
 
+def playerByTeam(_conn, teamID):
+    print("++++++++++++++++++++++++++++++++++")
+    print("Players from: ", teamID)
+
+    try:
+        sql = """
+            SELECT 
+                p_name,
+                p_teamname
+            FROM player AS p
+            WHERE
+                p.p_teamid = ?
+        """
+        args = [teamID]
+
+        cursor = _conn.cursor()
+        cursor.execute(sql, args)
+
+        l = '{:>10} {:>15}'.format("Player", "Team")
+        print(l)
+        print("-------------------------------")
+        rows = cursor.fetchall()
+        for row in rows:
+            l = '{:>10} {:>20}'.format(row[0], row[1])
+        print(l)
+    except Error as e:
+        print(e)
+        print("++++++++++++++++++++++++++++++++++")
+    return 0
+
+
 def main():
     database = r"Project_Database.sqlite"
 
@@ -139,6 +170,9 @@ def main():
         dropTable(conn)
         createTable(conn)
         populateTables(conn)
+
+        teamID = input("Enter Team: ")
+        playerByTeam(conn, teamID)
 
     closeConnection(conn, database)
 
