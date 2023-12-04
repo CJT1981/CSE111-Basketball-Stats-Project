@@ -561,7 +561,8 @@ def teamMenu(_conn):
         print("1. Back to main menu.")
         print("2. Find out how many games did the youngest team founded won during the 2022 - 2023 season.")
         print("3. Which team won the championship during the 2022 - 2023 season?")
-        print("4. ")
+        print("4. For each team, list the number of players in each position.")
+        print("5.  Which team has the highest total salary for their players?")
 
         choice = input("Enter your choice: ")
 
@@ -613,7 +614,44 @@ def teamMenu(_conn):
 
             cursor.close()
         elif choice == "4":
-            pass
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT t_name, p_position, COUNT(*) AS number_of_players
+            FROM team, player
+            WHERE t_teamid = p_teamid
+            GROUP BY t_name, p_position;
+            """
+            cursor.execute(query)
+            result = cursor.fetchall()
+
+            if result:
+                print(f"Team Name | Player Position | Number of Players")
+                for row in result:
+                    print(f"{row[0]} | {row[1]} | {row[2]}")
+            else:
+                print("No data available.")
+
+            cursor.close()
+        elif choice == "5":
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT t_name, SUM(p_salary) AS total_salary
+            FROM team, player
+            WHERE t_teamid = p_teamid
+            GROUP BY t_name
+            ORDER BY total_salary DESC;
+            """
+            cursor.execute(query)
+            result = cursor.fetchone()
+
+            if result:
+                print(f"{result[0]} has the total highest salary of ${result[1]} for their players.")
+            else:
+                print("No data available.")
+
+            cursor.close()
         else:
             print("Invalid choice, please try again.")
 
