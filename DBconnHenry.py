@@ -211,12 +211,12 @@ def main():
         dropTable(conn)
         createTable(conn)
         populateTables(conn)
-        mainMenu()
+        mainMenu(conn)
 
     closeConnection(conn, database)
 
 
-def mainMenu():
+def mainMenu(_conn):
     while True:
         print("\nMain Menu")
         print("1. Coaches")
@@ -231,37 +231,37 @@ def mainMenu():
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            coachesMenu()
+            coachesMenu(_conn)
         elif choice == "2":
-            gameMenu()
+            gameMenu(_conn)
         elif choice == "3":
-            newsMenu()
+            newsMenu(_conn)
         elif choice == "4":
-            playerMenu()
+            playerMenu(_conn)
         if choice == "5":
-            shotsMenu()
+            shotsMenu(_conn)
         elif choice == "6":
-            stadiumMenu()
+            stadiumMenu(_conn)
         elif choice == "7":
-            teamMenu()
+            teamMenu(_conn)
         elif choice == "8":
             break
         else:
             print("Invalid choice, please try again.")
 
-def coachesMenu():
+def coachesMenu(_conn):
     while True:
         print("\nCoaches Menu")
 
-def gameMenu():
+def gameMenu(_conn):
     while True:
         print("\nGame Menu")
 
-def newsMenu():
+def newsMenu(_conn):
     while True:
         print("\nNews Menu")
 
-def playerMenu():
+def playerMenu(_conn):
     while True:
         print("\nPlayer Menu")
         print("1. Who is the tallest player")
@@ -272,8 +272,23 @@ def playerMenu():
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            # Code to find and display the tallest player
-            pass
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT p_name, p_height
+            FROM player
+            ORDER BY p_height DESC
+            LIMIT 1;
+            """
+            cursor.execute(query)
+            result = cursor.fetchone()
+
+            if result:
+                print(f"The tallest player is {result[0]} with a height of {result[1]} ft.")
+            else:
+                print("No data available.")
+
+            cursor.close()
         elif choice == "2":
             # Code to find and display the most high paying player
             pass
@@ -286,15 +301,15 @@ def playerMenu():
         else:
             print("Invalid choice, please try again.")
 
-def shotsMenu():
+def shotsMenu(_conn):
     while True:
         print("\nShots Menu")
 
-def stadiumMenu():
+def stadiumMenu(_conn):
     while True:
         print("\nStadium Menu")
 
-def teamMenu():
+def teamMenu(_conn):
     while True:
         print("\nTeam Menu")
 
