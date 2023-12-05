@@ -2420,15 +2420,15 @@ def populateTable_News(connection):
     insertNews(connection, 1, 'Signing', '2022-06-12',
                'Jalen Brunson signed a 4-year deal worth $104 million with the New York Knicks')
     insertNews(connection, 2, 'Trade', '2022-07-06',
-               'The�Minnesota Timberwolves�traded�Malik Beasley,�Patrick Beverley,�Leandro Bolmaro,�Walker Kessler,�Jarred Vanderbilt, and five 1st round draft picks to the�Utah Jazz�for�Rudy Gobert.')
+               'The Minnesota Timberwolves traded Malik Beasley, Patrick Beverley, Leandro Bolmaro, Walker Kessler, Jarred Vanderbilt, and five 1st round draft picks to the Utah Jazz for Rudy Gobert.')
     insertNews(connection, 3, 'Trade', '2022-07-06',
-               'The�Detroit Pistons�traded�Jerami Grant�and�Ismael Kamagate�to the�Portland Trail Blazers�for�Gabriele Procida, a 1st round draft pick, and two 2nd round draft picks.')
+               'The Detroit Pistons traded Jerami Grant and Ismael Kamagate to the Portland Trail Blazers for Gabriele Procida, a 1st round draft pick, and two 2nd round draft picks.')
     insertNews(connection, 4, 'Trade', '2022-07-06',
-               'The�Denver Nuggets�traded�Will Barton�and�Monte Morris�to the�Washington Wizards�for�Kentavious Caldwell-Pope�and�Ish Smith.')
+               'The Denver Nuggets traded Will Barton and Monte Morris to the Washington Wizards for Kentavious Caldwell-Pope and Ish Smith.')
     insertNews(connection, 5, 'Trade', '2022-07-06',
-               'The�Atlanta Hawks�traded�Kevin Huerter�to the�Sacramento Kings�for�Maurice Harkless,�Justin Holiday�and a 2024 1st round draft pick')
+               'The Atlanta Hawks traded Kevin Huerter to the Sacramento Kings for Maurice Harkless, Justin Holiday and a 2024 1st round draft pick')
     insertNews(connection, 6, 'Trade', '2022-07-06',
-               'The�Detroit Pistons�traded a 1st round draft pick to the�New York Knicks�for�Jalen Duren�and�Kemba Walker')
+               'The Detroit Pistons traded a 1st round draft pick to the New York Knicks for Jalen Duren and Kemba Walker')
     insertNews(connection, 7, 'Extension', '2022-07-06',
                'Bradley Beal signed a 5-year extension worth $251 million with the Washington Wizards')
     insertNews(connection, 8, 'Extension', '2022-07-06',
@@ -2458,7 +2458,7 @@ def populateTable_News(connection):
     insertNews(connection, 20, 'Extension', '2022-07-08',
                'Nikola Jokic signed a 5-year extension worth $272 million with the Denver Nuggets ')
     insertNews(connection, 21, 'Trade', '2022-07-09',
-               'The�Boston Celtics�traded�Malik Fitts,�Juwan Morgan,�Aaron Nesmith,�Nik Stauskas,�Daniel Theis, and a 1st round draft pick to the�Indiana Pacers�for�Malcolm Brogdon.')
+               'The Boston Celtics traded Malik Fitts, Juwan Morgan, Aaron Nesmith, Nik Stauskas, Daniel Theis, and a 1st round draft pick to the Indiana Pacers for Malcolm Brogdon.')
     insertNews(connection, 22, 'Extension', '2022-07-09',
                'Damian Lillard signed a 2-year extension worth $106 million with the Portland Trailblazers')
     insertNews(connection, 23, 'Signing', '2022-07-15',
@@ -2466,31 +2466,31 @@ def populateTable_News(connection):
     insertNews(connection, 24, 'Extension', '2022-07-27',
                'James Harden signed a 2-year extension worth $68.6 million with the Philadelphia 76ers')
     insertNews(connection, 25, 'Trade', '2022-09-03',
-               'The�Cleveland Cavaliers�traded�Ochai Agbaji,�Lauri Markkanen,�Collin Sexton, and five 1st round draft picks to the�Utah Jazz�for�Donovan Mitchell.')
+               'The Cleveland Cavaliers traded Ochai Agbaji, Lauri Markkanen, Collin Sexton, and five 1st round draft picks to the Utah Jazz for Donovan Mitchell.')
     insertNews(connection, 26, 'Trade', '2022-09-22',
-               'The�Detroit Pistons�traded�Saben Lee�and�Kelly Olynyk�to the�Utah Jazz�for�Bojan Bogdanovic.')
+               'The Detroit Pistons traded Saben Lee and Kelly Olynyk to the Utah Jazz for Bojan Bogdanovic.')
     insertNews(connection, 27, 'Suspension', '2022-10-23',
                'Caleb Martin and Nikola Jovic were suspended for 1 game')
     insertNews(connection, 28, 'Extension', '2022-10-30',
                'Bojan Bogdanovic signed a 2-year extension worth $39 million with the Detroit Pistons')
     insertNews(connection, 29, 'Trade', '2023-01-23',
-               'The�Los Angeles Lakers�traded�Kendrick Nunn, and three 2nd round draft picks to the�Washington Wizards�for�Rui Hachimura.')
+               'The Los Angeles Lakers traded Kendrick Nunn, and three 2nd round draft picks to the Washington Wizards for Rui Hachimura.')
     insertNews(connection, 30, 'Extension', '2023-01-30',
                'Myles Turner signed a 2-year extension worth $40 million with the Indiana Pacers')
     insertNews(connection, 31, 'Trade', '2023-02-06',
-               'The�Brooklyn Nets�traded�Kyrie Irving�and�Markieff Morris�to the�Dallas Mavericks�for�Spencer Dinwiddie,�Dorian Finney-Smith, two 2nd round draft picks, and a 1st round draft pick ')
+               'The Brooklyn Nets traded Kyrie Irving and Markieff Morris to the Dallas Mavericks for Spencer Dinwiddie, Dorian Finney-Smith, two 2nd round draft picks, and a 1st round draft pick ')
     insertNews(connection, 32, 'Trade', '2023-02-09',
                'The Charlotte Hornets traded Mason Plumlee to the Los Angeles Clippers for Reggie Jackson and a 2nd round draft pick')
     insertNews(connection, 33, 'Trade', '2023-02-09', 'Charlotte Hornets traded Jalen McDaniels and a 2nd round draft pick to the Philadelphia 76ers; the New York Knicks traded Sviatoslav Mykhailiuk to the Charlotte Hornets; the New York Knicks traded Ryan Arcidiacono, Cam Reddish, Ante Tomic, and a 1st round draft pick to the Portland Trail Blazers; the Philadelphia 76ers traded a 2023 2nd round draft pick to the Charlotte Hornets; the Philadelphia 76ers traded Matisse Thybulle to the Portland Trail Blazers; the Portland Trail Blazers traded a 2nd round draft pick to the Charlotte Hornets; the Portland Trail Blazers traded Dani Diez, Bojan Dubljevic and Josh Hart to the New York Knicks; and the Portland Trail Blazers traded a 2nd round draft pick to the Philadelphia 76ers. ')
-    insertNews(connection, 34, 'Trade', '2023-02-09', 'The�Houston Rockets�traded�Eric Gordon�and a 1st round draft pick to the�Los Angeles Clippers; the�Los Angeles Clippers�traded�John Wall�and a 2023 1st round draft pick to the�Houston Rockets; the�Los Angeles Clippers�traded�Luke Kennard�and a 2nd round draft pick to the�Memphis Grizzlies; the�Memphis Grizzlies�traded�Danny Green�to the�Houston Rockets; and the�Memphis Grizzlies�traded a three 2nd round draft pick to the�Los Angeles Clippers.')
+    insertNews(connection, 34, 'Trade', '2023-02-09', 'The Houston Rockets traded Eric Gordon and a 1st round draft pick to the Los Angeles Clippers; the Los Angeles Clippers traded John Wall and a 2023 1st round draft pick to the Houston Rockets; the Los Angeles Clippers traded Luke Kennard and a 2nd round draft pick to the Memphis Grizzlies; the Memphis Grizzlies traded Danny Green to the Houston Rockets; and the Memphis Grizzlies traded a three 2nd round draft pick to the Los Angeles Clippers.')
     insertNews(connection, 35, 'Trade', '2023-02-09',
-               'The�Boston Celtics�traded�Justin Jackson, and two 2nd round draft picks to the�Oklahoma City Thunder�for�Mike Muscala.')
+               'The Boston Celtics traded Justin Jackson, and two 2nd round draft picks to the Oklahoma City Thunder for Mike Muscala.')
     insertNews(connection, 36, 'Trade', '2023-02-09',
-               'The�New Orleans Pelicans�traded�Devonte Graham, and four 2nd round draft picks to the�San Antonio Spurs�for�Josh Richardson.')
-    insertNews(connection, 37, 'Trade', '2023-02-09', 'In a 4-team trade, the�Atlanta Hawks�traded two 2nd round draft picks to the�Golden State Warriors; the�Atlanta Hawks�traded a three 2nd round draft picks to the�Portland Trail Blazers; the�Detroit Pistons�traded�Saddiq Bey�to the�Atlanta Hawks; the�Detroit Pistons�traded�Kevin Knox�to the�Portland Trail Blazers; the�Golden State Warriors�traded�James Wiseman�to the�Detroit Pistons; the�Golden State Warriors�traded two 2nd round draft picks to the�Portland Trail Blazers; and the�Portland Trail Blazers�traded�Gary Payton II�to the�Golden State Warriors.')
+               'The New Orleans Pelicans traded Devonte Graham, and four 2nd round draft picks to the San Antonio Spurs for Josh Richardson.')
+    insertNews(connection, 37, 'Trade', '2023-02-09', 'In a 4-team trade, the Atlanta Hawks traded two 2nd round draft picks to the Golden State Warriors; the Atlanta Hawks traded a three 2nd round draft picks to the Portland Trail Blazers; the Detroit Pistons traded Saddiq Bey to the Atlanta Hawks; the Detroit Pistons traded Kevin Knox to the Portland Trail Blazers; the Golden State Warriors traded James Wiseman to the Detroit Pistons; the Golden State Warriors traded two 2nd round draft picks to the Portland Trail Blazers; and the Portland Trail Blazers traded Gary Payton II to the Golden State Warriors.')
     insertNews(connection, 38, 'Trade', '2023-02-09', 'In a 4-team trade, the Brooklyn Nets traded Kevin Durant and T.J. Warren to the Phoenix Suns; the Indiana Pacers traded Juan Vaulet to the Brooklyn Nets; the Milwaukee Bucks traded two 2nd round draft picks to the Brooklyn Nets; the Milwaukee Bucks traded George Hill, Serge Ibaka, Jordan Nwora, and three 2nd round draft picks to the Indiana Pacers; the Phoenix Suns traded Mikal Bridges, Cameron Johnson, and five 1st round draft picks to the Brooklyn Nets; and the Phoenix Suns traded Jae Crowder to the Milwaukee Bucks.')
-    insertNews(connection, 39, 'Trade', '2023-02-09', 'In a 4-team trade, the�Denver Nuggets�traded�Bones Hyland�to the�Los Angeles Clippers; the�Denver Nuggets�traded�Davon Reed�to the�Los Angeles Lakers; the�Denver Nuggets�traded a 2nd round draft pick to the�Orlando Magic; the�Los Angeles Clippers�traded two 2nd round draft picks to the�Los Angeles Lakers; the�Los Angeles Lakers�traded�Thomas Bryant�to the�Denver Nuggets; the�Los Angeles Lakers�traded Patrick Beverley�to the�Orlando Magic; and the�Orlando Magic�traded�Mo Bamba�to the�Los Angeles Lakers.')
-    insertNews(connection, 40, 'Trade', '2023-02-09', 'In a 3-team trade, the�Los Angeles Lakers�traded a 2nd round draft pick to the�Minnesota Timberwolves; the�Los Angeles Lakers�traded�Damian Jones,�Juan Toscano-Anderson,�Russell Westbrook, and a 1st round draft pick to the�Utah Jazz; the�Minnesota Timberwolves�traded�D''Angelo Russell�to the�Los Angeles Lakers; the�Utah Jazz�traded�Malik Beasley�and�Jarred Vanderbilt�to the�Los Angeles Lakers; and the�Utah Jazz�traded�Nickeil Alexander-Walker,�Mike Conley, and two 2nd round draft picks to the�Minnesota Timberwolves.')
+    insertNews(connection, 39, 'Trade', '2023-02-09', 'In a 4-team trade, the Denver Nuggets traded Bones Hyland to the Los Angeles Clippers; the Denver Nuggets traded Davon Reed to the Los Angeles Lakers; the Denver Nuggets traded a 2nd round draft pick to the Orlando Magic; the Los Angeles Clippers traded two 2nd round draft picks to the Los Angeles Lakers; the Los Angeles Lakers traded Thomas Bryant to the Denver Nuggets; the Los Angeles Lakers traded Patrick Beverley to the Orlando Magic; and the Orlando Magic traded Mo Bamba to the Los Angeles Lakers.')
+    insertNews(connection, 40, 'Trade', '2023-02-09', 'In a 3-team trade, the Los Angeles Lakers traded a 2nd round draft pick to the Minnesota Timberwolves; the Los Angeles Lakers traded Damian Jones, Juan Toscano-Anderson, Russell Westbrook, and a 1st round draft pick to the Utah Jazz; the Minnesota Timberwolves traded D''Angelo Russell to the Los Angeles Lakers; the Utah Jazz traded Malik Beasley and Jarred Vanderbilt to the Los Angeles Lakers; and the Utah Jazz traded Nickeil Alexander-Walker, Mike Conley, and two 2nd round draft picks to the Minnesota Timberwolves.')
     insertNews(connection, 41, 'Trade', '2023-02-09',
                'The San Antonio Spurs traded Jakob Poeltl to the Toronto Raptors for Khem Birch, two  2nd round draft picks, and a 1st round draft pick.')
     insertNews(connection, 42, 'Signing', '2023-02-14',
@@ -2729,7 +2729,7 @@ def populateTable_Player(connection):
                  6.04, 178, 22.1, 3.7, 3.7, 0.8, 0.2, 0.416, 0.338, 2021, 9441840)
     insertPlayer(connection, 103, 'Jabari Smith Jr.', 'HOU-Rockets', 11,
                  4, 6.1, 220, 12.8, 7.2, 1.3, 0.5, 0.9, 0.408, 0.307, 2022, 8882640)
-    insertPlayer(connection, 104, 'Alperen Seng�n', 'HOU-Rockets', 11, 5,
+    insertPlayer(connection, 104, 'Alperen Seng n', 'HOU-Rockets', 11, 5,
                  6.09, 235, 14.8, 9.0, 3.9, 0.9, 0.9, 0.553, 0.333, 2021, 3375360)
     insertPlayer(connection, 105, 'KJ Martin', 'HOU-Rockets', 11, 3,
                  6.06, 215, 12.7, 5.5, 1.5, 0.5, 0.4, 0.569, 0.315, 2020, 1782621)
@@ -2789,7 +2789,7 @@ def populateTable_Player(connection):
                  6.1, 253, 25.9, 12.5, 2.6, 1.1, 2.0, 0.563, 0.257, 2012, 37980720)
     insertPlayer(connection, 133, 'D''Angelo Russell', 'LAL-Lakers', 14,
                  1, 6.04, 193, 17.4, 2.9, 6.1, 0.6, 0.5, 0.484, 0.414, 2015, 31377750)
-    insertPlayer(connection, 134, 'Dennis Schr�der', 'LAL-Lakers', 14, 1,
+    insertPlayer(connection, 134, 'Dennis Schr der', 'LAL-Lakers', 14, 1,
                  6.03, 172, 12.6, 2.5, 4.5, 0.8, 0.2, 0.415, 0.329, 2013, 1836090)
     insertPlayer(connection, 135, 'Austin Reaves', 'LAL-Lakers', 14, 2,
                  6.05, 206, 13.0, 3.0, 3.4, 0.5, 0.3, 0.529, 0.398, 2021, 1563518)
@@ -3337,7 +3337,7 @@ def populateTable_Shots(connection):
                 2.5, 7.3, 0.338, 5.0, 10.6, 0.471, 0.485, 4.8, 6.1, 0.786)
     insertShots(connection, 103, 'Jabari Smith Jr.', 4.6, 11.3, 0.408,
                 1.5, 4.9, 0.307, 3.1, 6.3, 0.487, 0.475, 2.1, 2.6, 0.786)
-    insertShots(connection, 104, 'Alperen Seng�n', 5.9, 10.7, 0.553,
+    insertShots(connection, 104, 'Alperen Seng n', 5.9, 10.7, 0.553,
                 0.3, 0.8, 0.333, 5.6, 9.9, 0.57, 0.565, 2.7, 3.8, 0.715)
     insertShots(connection, 105, 'KJ Martin', 5.0, 8.8, 0.569, 0.8,
                 2.6, 0.315, 4.2, 6.1, 0.679, 0.617, 1.8, 2.7, 0.68)
@@ -3397,7 +3397,7 @@ def populateTable_Shots(connection):
                 0.3, 1.3, 0.257, 9.3, 15.9, 0.589, 0.573, 6.2, 7.9, 0.784)
     insertShots(connection, 133, 'D''Angelo Russell', 6.3, 13.0, 0.484,
                 2.7, 6.5, 0.414, 3.6, 6.5, 0.555, 0.588, 2.1, 2.9, 0.735)
-    insertShots(connection, 134, 'Dennis Schr�der', 4.1, 9.8, 0.415,
+    insertShots(connection, 134, 'Dennis Schr der', 4.1, 9.8, 0.415,
                 1.1, 3.4, 0.329, 3.0, 6.4, 0.461, 0.472, 3.3, 3.8, 0.857)
     insertShots(connection, 135, 'Austin Reaves', 4.0, 7.7, 0.529,
                 1.3, 3.4, 0.398, 2.7, 4.3, 0.631, 0.616, 3.6, 4.1, 0.864)

@@ -183,7 +183,7 @@ def populateTables(_conn):
     print("Populate stadium")
     insertValues(_conn, 'SQLfiles/populate_stadium.sql')
     print("++++++++++++++++++++++++++++++++++")
-    
+
     print("++++++++++++++++++++++++++++++++++")
     print("Populate team")
     insertValues(_conn, 'SQLfiles/populate_team.sql')
@@ -201,7 +201,6 @@ def insertValues(_conn, sql_file):
 
     cursor.executescript(sql_script)
     _conn.commit()
-
 
 
 def main():
@@ -229,7 +228,7 @@ def mainMenu(_conn):
         print("6. Stadium")
         print("7. Team")
         print("8. Exit")
-        
+
         choice = input("Enter your choice: ")
 
         if choice == "1":
@@ -252,9 +251,6 @@ def mainMenu(_conn):
             print("Invalid choice, please try again.")
 
 
-
-
-
 def coachesMenu(_conn):
     while True:
         print("\nCoaches Menu")
@@ -262,7 +258,8 @@ def coachesMenu(_conn):
         print("2. Find the number of coaches that have won at least 1 championship in their career.")
         print("3. Find how many championship(s) did a certain coach win.")
         print("4. Find when did a certain coach start his career.")
-        print("5. Find what team did a certain coach coach during the 2022 - 2023 NBA season.")
+        print(
+            "5. Find what team did a certain coach coach during the 2022 - 2023 NBA season.")
 
         choice = input("Enter your choice: ")
 
@@ -280,30 +277,15 @@ def coachesMenu(_conn):
             result = cursor.fetchone()
 
             if result:
-                print(f"The number of coaches who won at least 1 championship is {result[0]}.")
+                print(
+                    f"The number of coaches who won at least 1 championship is {result[0]}.")
             else:
                 print("No data available.")
 
             cursor.close()
         elif choice == "3":
-            c_name_input = input("Enter the full name of the coach: ").lower()
 
-            cursor = _conn.cursor()
-
-            query = """
-            SELECT c_name, c_numofchamp
-            FROM coaches
-            WHERE LOWER(c_name) = ?;
-            """
-            cursor.execute(query, (c_name_input,))
-            result = cursor.fetchone()
-
-            if result:
-                print(f"{result[0]} has won {result[1]} championship(s).")
-            else:
-                print("No data available or coach not found.")
-
-            cursor.close()
+            pass
         elif choice == "4":
             c_name_input = input("Enter the full name of the coach: ").lower()
 
@@ -324,7 +306,8 @@ def coachesMenu(_conn):
 
             cursor.close()
         elif choice == "5":
-            c_name_input = input("Enter the full name of the coach: ").strip().lower()
+            c_name_input = input(
+                "Enter the full name of the coach: ").strip().lower()
 
             cursor = _conn.cursor()
 
@@ -338,13 +321,15 @@ def coachesMenu(_conn):
             result = cursor.fetchone()
 
             if result:
-                print(f"{result[0]} was a head coach for {result[1]} team during the 2022 - 2023 season.")
+                print(
+                    f"{result[0]} was a head coach for {result[1]} team during the 2022 - 2023 season.")
             else:
                 print("No data available or coach not found.")
 
             cursor.close()
         else:
             print("Invalid choice, please try again.")
+
 
 def gameMenu(_conn):
     while True:
@@ -391,7 +376,8 @@ def gameMenu(_conn):
             result = cursor.fetchone()
 
             if result:
-                print(f"On {result[0]}, {result[1]} played against {result[3]}, and {result[4]} won with the highest score of {result[2]} throughtout the enitire season!")
+                print(
+                    f"On {result[0]}, {result[1]} played against {result[3]}, and {result[4]} won with the highest score of {result[2]} throughtout the enitire season!")
             else:
                 print("No data available.")
 
@@ -435,7 +421,8 @@ def gameMenu(_conn):
 
             cursor.close()
         elif choice == "4":
-            date_input = input("Enter the date you are looking for in the following format YYYY-MM-DD: ")
+            date_input = input(
+                "Enter the date you are looking for in the following format YYYY-MM-DD: ")
 
             cursor = _conn.cursor()
 
@@ -461,10 +448,12 @@ def gameMenu(_conn):
             result = cursor.fetchall()
 
             if result:
-                print("Game ID | Home Team | Away Team | Date | Winner Team | Score | Stadium")
+                print(
+                    "Game ID | Home Team | Away Team | Date | Winner Team | Score | Stadium")
                 for row in result:
-                    print(f"{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]}")
-            
+                    print(
+                        f"{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]}")
+
             else:
                 print("No data available or the date is incorrect.")
 
@@ -603,13 +592,15 @@ def gameMenu(_conn):
         else:
             print("Invalid choice, please try again.")
 
+
 def newsMenu(_conn):
     while True:
         print("\nNews Menu")
         print("1. Back to main menu.")
-        print("2. Out of all the transactions happened on July 6, 2022, how many of them were 'Trade' type.")
-        print("3. ")
-        print("4. ")
+        print("2. See all the news that occurred")
+        print("3. Input a type of news to only see specific news:")
+        print("4. Input a date to see what news occurred on this date:")
+        print("5. Input a date and type of news to only see specific news on that date:")
 
         choice = input("Enter your choice: ")
 
@@ -619,28 +610,31 @@ def newsMenu(_conn):
             cursor = _conn.cursor()
 
             query = """
-            SELECT n_date, n_type, count(*) as n_cnt
+            SELECT 
+                n_date, 
+                n_type, 
+                n_news
             FROM news
-            WHERE n_type = 'Trade'
-            AND n_date = '2022-07-06';
             """
             cursor.execute(query)
-            result = cursor.fetchone()
+            result = cursor.fetchall()
 
             if result:
-                print(f"{result[2]} {result[1]} type transactions happened on {result[0]}.")
+                print(f"News Type | Date | News")
+                for row in result:
+                    print(f"{row[0]} | {row[1]} | {row[2]}")
             else:
                 print("No data available.")
 
             cursor.close()
         elif choice == "3":
-          
-            
+
             pass
         elif choice == "4":
             pass
-        else:
+        elif choice != "1" or choice != "2" or choice != "3" or choice != "4" or choice != "5":
             print("Invalid choice, please try again.")
+
 
 def playerMenu(_conn):
     while True:
@@ -650,7 +644,7 @@ def playerMenu(_conn):
         print("3. Find top 5 players that have the highest field goal percentage and which teams they play for.")
         print("4. What is the salary of a player who has the lowest 2 pointer percentage, compared to the highest 2 pointer percentage player.")
         print("5. Which players have a higher 3-point percentage than 2-point percentage?")
-        
+
         choice = input("Enter your choice: ")
 
         if choice == "1":
@@ -668,7 +662,8 @@ def playerMenu(_conn):
             result = cursor.fetchone()
 
             if result:
-                print(f"The tallest player is {result[0]} with a height of {result[1]} ft.")
+                print(
+                    f"The tallest player is {result[0]} with a height of {result[1]} ft.")
             else:
                 print("No data available.")
 
@@ -750,6 +745,7 @@ def playerMenu(_conn):
         else:
             print("Invalid choice, please try again.")
 
+
 def shotsMenu(_conn):
     while True:
         print("\nShots Menu")
@@ -763,15 +759,16 @@ def shotsMenu(_conn):
         if choice == "1":
             break
         elif choice == "2":
-            
+
             pass
         elif choice == "3":
-            
+
             pass
         elif choice == "4":
             pass
         else:
             print("Invalid choice, please try again.")
+
 
 def stadiumMenu(_conn):
     while True:
@@ -800,18 +797,20 @@ def stadiumMenu(_conn):
             result = cursor.fetchone()
 
             if result:
-                print(f"The {result[0]} stadium was used the most - {result[1]} times.")
+                print(
+                    f"The {result[0]} stadium was used the most - {result[1]} times.")
             else:
                 print("No data available.")
 
             cursor.close()
         elif choice == "3":
-            
+
             pass
         elif choice == "4":
             pass
         else:
             print("Invalid choice, please try again.")
+
 
 def teamMenu(_conn):
     while True:
@@ -845,7 +844,8 @@ def teamMenu(_conn):
             result = cursor.fetchone()
 
             if result:
-                print(f"The {result[0]} team was founded in {result[1]} and won {result[2]} games during the 2022 - 2023 championship.")
+                print(
+                    f"The {result[0]} team was founded in {result[1]} and won {result[2]} games during the 2022 - 2023 championship.")
             else:
                 print("No data available.")
 
@@ -866,7 +866,8 @@ def teamMenu(_conn):
             result = cursor.fetchone()
 
             if result:
-                print(f"{result[0]} entered finals with {result[2]} and won with the score {result[1]}.")
+                print(
+                    f"{result[0]} entered finals with {result[2]} and won with the score {result[1]}.")
             else:
                 print("No data available.")
 
@@ -905,7 +906,8 @@ def teamMenu(_conn):
             result = cursor.fetchone()
 
             if result:
-                print(f"{result[0]} has the total highest salary of ${result[1]} for their players.")
+                print(
+                    f"{result[0]} has the total highest salary of ${result[1]} for their players.")
             else:
                 print("No data available.")
 
