@@ -354,6 +354,11 @@ def gameMenu(_conn):
         print("3. Find history of games played between two teams.")
         print("4. Show the details of the games that were played on a certain date.")
         print("5. Show the details of the games that were played during a certain month.")
+        print("6. Find how many home games did a certain team win.")
+        print("7. Find how many away games did a certain team win.")
+        print("8. Find how many games did a certain team win and lose.")
+        print("9. Find a certain team's overall ranking.")
+        print("10. ")
 
         choice = input("Enter your choice: ")
 
@@ -375,7 +380,11 @@ def gameMenu(_conn):
                 LEFT JOIN team at ON g.g_away = at.t_teamid
                 LEFT JOIN team wt ON g.g_winner = wt.t_teamid
             ORDER BY 
-                (CAST(SUBSTR(g.g_score, 1, INSTR(g.g_score, '(') - 1) AS INTEGER) + CAST(SUBSTR(g.g_score, INSTR(g.g_score, '-') + 1, INSTR(g.g_score, '(') - INSTR(g.g_score, '-') - 2) AS INTEGER)) DESC
+                (
+                    CAST(SUBSTR(g.g_score, 1, INSTR(g.g_score, '(') - 1) AS INTEGER) +
+                    CAST(SUBSTR(g.g_score, INSTR(g.g_score, '-') + 1, 
+                    INSTR(g.g_score, '(') - INSTR(g.g_score, '-') - 2) AS INTEGER)
+                ) DESC
             LIMIT 1;
             """
             cursor.execute(query)
@@ -388,8 +397,43 @@ def gameMenu(_conn):
 
             cursor.close()
         elif choice == "3":
-            
-            pass
+            team1 = input("Enter the first team's name: ").strip().lower()
+            team2 = input("Enter the second team's name: ").strip().lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT 
+                g.g_gameid,
+                ht.t_name AS Home_Team,
+                at.t_name AS Away_Team,
+                g.g_date,
+                wt.t_name AS Winning_Team,
+                g.g_score,
+                st.st_name AS Stadium
+            FROM 
+                game g
+                LEFT JOIN team ht ON g.g_home = ht.t_teamid
+                LEFT JOIN team at ON g.g_away = at.t_teamid
+                LEFT JOIN team wt ON g.g_winner = wt.t_teamid
+                LEFT JOIN stadium st ON g.g_stadium = st.st_stadiumid
+            WHERE 
+                (LOWER(ht.t_name) = ? AND LOWER(at.t_name) = ?) OR 
+                (LOWER(ht.t_name) = ? AND LOWER(at.t_name) = ?)
+            ORDER BY 
+                g.g_date;
+            """
+            cursor.execute(query, (team1, team2, team2, team1))
+            result = cursor.fetchall()
+
+            if result:
+                print("Game ID | Home Team | Away Team | Date | Winner Team | Score | Stadium")
+                for row in result:
+                    print(f"{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]}")
+            else:
+                print("No games found between these two teams.")
+
+            cursor.close()
         elif choice == "4":
             date_input = input("Enter the date you are looking for in the following format YYYY-MM-DD: ")
 
@@ -459,6 +503,101 @@ def gameMenu(_conn):
             
             else:
                 print("No data available or the date is incorrect.")
+
+            cursor.close()
+        elif choice == "6":
+            team_name = input("Enter the team's name: ").lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT 
+                t_name, 
+                COUNT(*) AS total_home_games,
+                SUM(CASE WHEN g_winner = t_teamid THEN 1 ELSE 0 END) AS home_wins
+            FROM game, team
+            WHERE g_home = t_teamid
+            AND LOWER(t_name) = ?;
+            """
+            cursor.execute(query, (team_name,))
+            result = cursor.fetchone()
+
+            if result and result[1] > 0:
+                print(f"{result[0]} has won {result[2]} home game(s) out of {result[1]}.")
+            else:
+                print(f"{team_name} has not won any home games or the team name is incorrect.")
+
+            cursor.close()
+        elif choice == "7":
+            team_name = input("Enter the team's name: ").lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT 
+                t_name, 
+                COUNT(*) AS total_away_games,
+                SUM(CASE WHEN g_winner = t_teamid THEN 1 ELSE 0 END) AS away_wins
+            FROM game, team
+            WHERE g_away = t_teamid
+            AND LOWER(t_name) = ?;
+            """
+            cursor.execute(query, (team_name,))
+            result = cursor.fetchone()
+
+            if result and result[1] > 0:
+                print(f"{result[0]} has won {result[2]} away game(s) out of {result[1]}.")
+            else:
+                print(f"{team_name} has not won any home games or the team name is incorrect.")
+
+            cursor.close()
+        elif choice == "8":
+            team_name = input("Enter the team's name: ").lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT 
+                t_name,
+                (SELECT COUNT(*) FROM game WHERE g_winner = t_teamid) AS total_wins,
+                (SELECT COUNT(*) FROM game WHERE (g_home = t_teamid OR g_away = t_teamid) AND g_winner != t_teamid) AS total_losses
+            FROM team
+            WHERE LOWER(t_name) = ?;
+            """
+            cursor.execute(query, (team_name,))
+            result = cursor.fetchone()
+
+            if result:
+                print(f"{result[0]} has a record of {result[1]}-{result[2]}.")
+            else:
+                print(f"{team_name} has not won any home games or the team name is incorrect.")
+
+            cursor.close()
+        elif choice == "9":
+            team_name = input("Enter the team's name: ").lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT 
+                t.t_name,
+                COUNT(CASE WHEN g.g_winner = t.t_teamid THEN 1 END) AS Wins,
+                COUNT(CASE WHEN g.g_winner != t.t_teamid AND (g.g_home = t.t_teamid OR g.g_away = t.t_teamid) THEN 1 END) AS Losses
+            FROM 
+                team t
+                LEFT JOIN game g ON (g.g_home = t.t_teamid OR g.g_away = t.t_teamid)
+            WHERE 
+                t.t_name = ?
+            GROUP BY 
+                t.t_teamid, t.t_name;
+            """
+            cursor.execute(query, (team_name,))
+            result = cursor.fetchone()
+
+            if result:
+                print(f"{result[0]} - Wins: {result[1]}, Losses: {result[2]}")
+            else:
+                print(f"No data found for {team_name} or the team name is incorrect.")
 
             cursor.close()
         else:
