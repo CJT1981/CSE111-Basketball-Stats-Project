@@ -433,12 +433,12 @@ def newsMenu(_conn):
         print("5. Input a date and type of news to only see specific news on that date:")
 
         choice = input("Enter your choice: ")
+        tradeTypes = "The news types are: Extension, Firing, Hiring, Signing, Suspension, Trade"
 
         if choice == "1":
             break
         elif choice == "2":
             cursor = _conn.cursor()
-
             query = """
             SELECT 
                 n_date, 
@@ -455,13 +455,83 @@ def newsMenu(_conn):
                     print(f"{row[0]} | {row[1]} | {row[2]}")
             else:
                 print("No data available.")
-
             cursor.close()
         elif choice == "3":
+            print(tradeTypes)
+            newsType = input(
+                "What news would you be interested in looking into: ")
 
-            pass
+            cursor = _conn.cursor()
+            query = """
+            SELECT 
+                n_date, 
+                n_type, 
+                n_news
+            FROM news
+            WHERE 
+                n_type = ?
+            """
+            cursor.execute(query, (newsType,))
+            result = cursor.fetchall()
+
+            if result:
+                print(f"Date | News Type | News")
+                for row in result:
+                    print(f"{row[0]} | {row[1]} | {row[2]}")
+            else:
+                print("No data available.")
+            cursor.close()
         elif choice == "4":
-            pass
+            date = input(
+                "Enter a date to see the news in YYYY-MM-DD format: ")
+
+            cursor = _conn.cursor()
+            query = """
+            SELECT 
+                n_date, 
+                n_type, 
+                n_news
+            FROM news
+            WHERE 
+                n_date = ?
+            """
+            cursor.execute(query, (date,))
+            result = cursor.fetchall()
+
+            if result:
+                print(f"Date | News Type | News")
+                for row in result:
+                    print(f"{row[0]} | {row[1]} | {row[2]}")
+            else:
+                print("No data available.")
+        elif choice == "5":
+            print(tradeTypes)
+            newsType = input(
+                "What news would you be interested in looking into: ")
+            date = input(
+                "Enter a date to see the news in YYYY-MM-DD format: ")
+
+            cursor = _conn.cursor()
+            query = """
+            SELECT 
+                n_date, 
+                n_type, 
+                n_news
+            FROM news
+            WHERE 
+                n_type = ? AND
+                n_date = ?
+            """
+            args = [newsType, date]
+            cursor.execute(query, args)
+            result = cursor.fetchall()
+
+            if result:
+                print(f"Date | News Type | News")
+                for row in result:
+                    print(f"{row[0]} | {row[1]} | {row[2]}")
+            else:
+                print("No data available.")
         elif choice != "1" or choice != "2" or choice != "3" or choice != "4" or choice != "5":
             print("Invalid choice, please try again.")
 
