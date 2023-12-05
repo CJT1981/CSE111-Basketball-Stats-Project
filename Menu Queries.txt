@@ -1,0 +1,65 @@
+Coaches: 
+how championships each coach?
+how many champpionship did a ? win?
+When did ? start coaching? 
+how long did ? coach for?
+which team did ? coach for?
+
+Game:
+who had the highest scoring game? 
+how game details between ?(team1) and ?(team2)
+how many games were played on ? date?
+how many games were played on ? month?
+how many home games did ? team win?
+how many away games did ? team win?
+how many games did ? team win?
+Standing
+Longest winning streak? show team and streak 
+
+News:
+What transactions happened on ? date?
+What type of transaction happened on ? date? 
+
+Player:
+Show player biography? (Team, position, height, weight, startyear, salary)
+What is ?(player name) ?(stat)? (everything else not in bio) *add comment if they want advance stats go to shots table*
+How long have ?(player) been playin for? 
+Average height of ?(position)?
+Average weight for ?(position)? 
+Show ?(stat) for ?(position)? limit to 10
+What top 10 ?(performance stat) per game?
+
+
+Shots: 
+What is ?(Player name) advanced stats)?
+Compare ?(player1) and ?(player2) efficiency? (LOWER(p_name) = LOWER(?))
+League average for each statistic?
+what is ?(player name) ?(advance stat) rank in category? 
+What is league average shooting performance for ?(position)?
+Enter ?(player name) for shooting performance in (2p, 3p, FT)?
+Show all players with ?(advance stat) above ?(threshold)
+top 10 ?(advance stat)? 
+
+Team:
+Basic team information:
+Team Roster:
+?(team) stadium details:
+?(Team) Salary and Salary per Player:
+Average ?(team) statistics 
+Average Advance ?(team) statistics
+?(team) top performers? (ppg, rpg, apg, spg, bpg)
+Longest ?(team) winning streak? (before april 11 bc of playoffs)
+-- ?(player) ?(stat) vs average team stat --
+
+
+
+
+
+
+
+
+
+
+
+
+
