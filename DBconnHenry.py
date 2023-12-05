@@ -427,29 +427,32 @@ def newsMenu(_conn):
     while True:
         print("\nNews Menu")
         print("1. Back to main menu.")
-        print("2. Out of all the transactions happened on July 6, 2022, how many of them were 'Trade' type.")
-        print("3. ")
-        print("4. ")
+        print("2. See all the news that occurred")
+        print("3. Input a type of news to only see specific news:")
+        print("4. Input a date to see what news occurred on this date:")
+        print("5. Input a date and type of news to only see specific news on that date:")
 
         choice = input("Enter your choice: ")
 
-        if choice == 1:
+        if choice == "1":
             break
         elif choice == "2":
             cursor = _conn.cursor()
 
             query = """
-            SELECT n_date, n_type, count(*) as n_cnt
+            SELECT 
+                n_date, 
+                n_type, 
+                n_news
             FROM news
-            WHERE n_type = 'Trade'
-            AND n_date = '2022-07-06';
             """
             cursor.execute(query)
-            result = cursor.fetchone()
+            result = cursor.fetchall()
 
             if result:
-                print(
-                    f"{result[2]} {result[1]} type transactions happened on {result[0]}.")
+                print(f"News Type | Date | News")
+                for row in result:
+                    print(f"{row[0]} | {row[1]} | {row[2]}")
             else:
                 print("No data available.")
 
@@ -459,7 +462,7 @@ def newsMenu(_conn):
             pass
         elif choice == "4":
             pass
-        else:
+        elif choice != "1" or choice != "2" or choice != "3" or choice != "4" or choice != "5":
             print("Invalid choice, please try again.")
 
 
