@@ -260,8 +260,9 @@ def coachesMenu(_conn):
         print("\nCoaches Menu")
         print("1. Back to main menu.")
         print("2. Find the number of coaches that have won at least 1 championship in their career.")
-        print("3. ")
-        print("4. ")
+        print("3. Find how many championship(s) did a certain coach win.")
+        print("4. Find when did a certain coach start his career.")
+        print("5. Find what team did a certain coach coach during the 2022 - 2023 NBA season.")
 
         choice = input("Enter your choice: ")
 
@@ -285,10 +286,63 @@ def coachesMenu(_conn):
 
             cursor.close()
         elif choice == "3":
-            
-            pass
+            c_name_input = input("Enter the full name of the coach: ").lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT c_name, c_numofchamp
+            FROM coaches
+            WHERE LOWER(c_name) = ?;
+            """
+            cursor.execute(query, (c_name_input,))
+            result = cursor.fetchone()
+
+            if result:
+                print(f"{result[0]} has won {result[1]} championship(s).")
+            else:
+                print("No data available or coach not found.")
+
+            cursor.close()
         elif choice == "4":
-            pass
+            c_name_input = input("Enter the full name of the coach: ").lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT c_name, c_startyear
+            FROM coaches
+            WHERE LOWER(c_name) = ?;
+            """
+            cursor.execute(query, (c_name_input,))
+            result = cursor.fetchone()
+
+            if result:
+                print(f"{result[0]} started coaching in {result[1]}.")
+            else:
+                print("No data available or coach not found.")
+
+            cursor.close()
+        elif choice == "5":
+            c_name_input = input("Enter the full name of the coach: ").strip().lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT c.c_name, t.t_name
+            FROM coaches c
+            JOIN team t ON c.c_coachid = t.t_coachid
+            WHERE LOWER(c.c_name) = ?;
+            """
+            cursor.execute(query, (c_name_input,))
+            result = cursor.fetchone()
+
+            if result:
+                print(f"{result[0]} was a head coach for {result[1]} team during the 2022 - 2023 season.")
+            else:
+                print("No data available or coach not found.")
+
+            cursor.close()
         else:
             print("Invalid choice, please try again.")
 
@@ -296,15 +350,49 @@ def gameMenu(_conn):
     while True:
         print("\nGame Menu")
         print("1. Back to main menu.")
-        print("2. Show the details of the games that were played on October 21, 2022.")
-        print("3. ")
-        print("4. ")
+        print("2. Display the info of a highest scoring game.")
+        print("3. Find history of games played between two teams.")
+        print("4. Show the details of the games that were played on a certain date.")
+        print("5. Show the details of the games that were played during a certain month.")
 
         choice = input("Enter your choice: ")
 
         if choice == "1":
             break
         elif choice == "2":
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT 
+                g.g_date,
+                ht.t_name AS Home_Team,
+                g.g_score,
+                at.t_name AS Away_Team,
+                wt.t_name AS Winning_Team
+            FROM 
+                game g
+                LEFT JOIN team ht ON g.g_home = ht.t_teamid
+                LEFT JOIN team at ON g.g_away = at.t_teamid
+                LEFT JOIN team wt ON g.g_winner = wt.t_teamid
+            ORDER BY 
+                (CAST(SUBSTR(g.g_score, 1, INSTR(g.g_score, '(') - 1) AS INTEGER) + CAST(SUBSTR(g.g_score, INSTR(g.g_score, '-') + 1, INSTR(g.g_score, '(') - INSTR(g.g_score, '-') - 2) AS INTEGER)) DESC
+            LIMIT 1;
+            """
+            cursor.execute(query)
+            result = cursor.fetchone()
+
+            if result:
+                print(f"On {result[0]}, {result[1]} played against {result[3]}, and {result[4]} won with the highest score of {result[2]} throughtout the enitire season!")
+            else:
+                print("No data available.")
+
+            cursor.close()
+        elif choice == "3":
+            
+            pass
+        elif choice == "4":
+            date_input = input("Enter the date you are looking for in the following format YYYY-MM-DD: ")
+
             cursor = _conn.cursor()
 
             query = """
@@ -317,15 +405,15 @@ def gameMenu(_conn):
                 g.g_score,
                 st.st_name AS Stadium
             FROM 
-                games g
+                game g
                 LEFT JOIN team ht ON g.g_home = ht.t_teamid
                 LEFT JOIN team at ON g.g_away = at.t_teamid
                 LEFT JOIN team wt ON g.g_winner = wt.t_teamid
                 LEFT JOIN stadium st ON g.g_stadium = st.st_stadiumid
             WHERE 
-                g.g_date = '2022-10-21';
+                g.g_date = ?;
             """
-            cursor.execute(query)
+            cursor.execute(query, (date_input,))
             result = cursor.fetchall()
 
             if result:
@@ -334,14 +422,45 @@ def gameMenu(_conn):
                     print(f"{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]}")
             
             else:
-                print("No data available.")
+                print("No data available or the date is incorrect.")
 
             cursor.close()
-        elif choice == "3":
+        elif choice == "5":
+            month_input = input("Enter the year and month you are looking for in the following format YYYY-MM: ")
+            month_input = month_input + '%'
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT 
+                g.g_gameid,
+                ht.t_name AS Home_Team,
+                at.t_name AS Away_Team,
+                g.g_date,
+                wt.t_name AS Winning_Team,
+                g.g_score,
+                st.st_name AS Stadium
+            FROM 
+                game g
+                LEFT JOIN team ht ON g.g_home = ht.t_teamid
+                LEFT JOIN team at ON g.g_away = at.t_teamid
+                LEFT JOIN team wt ON g.g_winner = wt.t_teamid
+                LEFT JOIN stadium st ON g.g_stadium = st.st_stadiumid
+            WHERE 
+                g.g_date LIKE ?;
+            """
+            cursor.execute(query, (month_input,))
+            result = cursor.fetchall()
+
+            if result:
+                print("Game ID | Home Team | Away Team | Date | Winner Team | Score | Stadium")
+                for row in result:
+                    print(f"{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]}")
             
-            pass
-        elif choice == "4":
-            pass
+            else:
+                print("No data available or the date is incorrect.")
+
+            cursor.close()
         else:
             print("Invalid choice, please try again.")
 
