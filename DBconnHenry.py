@@ -258,8 +258,7 @@ def coachesMenu(_conn):
         print("2. Find the number of coaches that have won at least 1 championship in their career.")
         print("3. Find how many championship(s) did a certain coach win.")
         print("4. Find when did a certain coach start his career.")
-        print(
-            "5. Find what team did a certain coach coach during the 2022 - 2023 NBA season.")
+        print("5. Find what team did a certain coach coach during the 2022 - 2023 NBA season.")
 
         choice = input("Enter your choice: ")
 
@@ -343,7 +342,7 @@ def gameMenu(_conn):
         print("7. Find how many away games did a certain team win.")
         print("8. Find how many games did a certain team win and lose.")
         print("9. Find a certain team's overall ranking.")
-        print("10. ")
+        print("10. Find a certain team's longest winning streak.")
 
         choice = input("Enter your choice: ")
 
@@ -383,8 +382,8 @@ def gameMenu(_conn):
 
             cursor.close()
         elif choice == "3":
-            team1 = input("Enter the first team's name: ").strip().lower()
-            team2 = input("Enter the second team's name: ").strip().lower()
+            team1 = input("Enter the first team's name: ").lower()
+            team2 = input("Enter the second team's name: ").lower()
 
             cursor = _conn.cursor()
 
@@ -587,6 +586,53 @@ def gameMenu(_conn):
                 print(f"{result[0]} - Wins: {result[1]}, Losses: {result[2]}")
             else:
                 print(f"No data found for {team_name} or the team name is incorrect.")
+
+            cursor.close()
+        elif choice == "10":
+            team_name = input("Enter the team's name: ").lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            WITH OrderedGames AS (
+                SELECT 
+                    g.g_date,
+                    t.t_teamid,
+                    t.t_name,
+                    CASE WHEN g.g_winner = t.t_teamid THEN 1 ELSE 0 END AS IsWin,
+                    ROW_NUMBER() OVER (PARTITION BY t.t_teamid ORDER BY g.g_date) AS RowNum
+                FROM 
+                    game g
+                    JOIN team t ON (g.g_home = t.t_teamid OR g.g_away = t.t_teamid)
+                WHERE 
+                    LOWER(t.t_name) = ? AND g.g_date < '2023-04-11'
+            ),
+            Streaks AS (
+                SELECT 
+                    og.t_teamid,
+                    og.t_name,
+                    og.IsWin,
+                    og.RowNum - ROW_NUMBER() OVER (PARTITION BY og.t_teamid, og.IsWin ORDER BY og.g_date) AS StreakGroup
+                FROM 
+                    OrderedGames og
+                WHERE 
+                    og.IsWin = 1
+            )
+            SELECT 
+                s.t_name,
+                MAX(COUNT(*)) OVER (PARTITION BY s.t_teamid) AS LongestWinStreak
+            FROM 
+                Streaks s
+            GROUP BY 
+                StreakGroup, s.t_teamid, s.t_name;
+            """
+            cursor.execute(query, (team_name,))
+            result = cursor.fetchone()
+
+            if result:
+                print(f"The longest winning streak for {result[0]} is {result[1]} games.")
+            else:
+                print(f"No winning streak data found or the team name is incorrect.")
 
             cursor.close()
         else:
