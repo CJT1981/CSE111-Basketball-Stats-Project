@@ -751,10 +751,14 @@ def playerMenu(_conn):
     while True:
         print("\nPlayer Menu")
         print("1. Back to main menu.")
-        print("2. Who is the tallest player?")
-        print("3. Find top 5 players that have the highest field goal percentage and which teams they play for.")
-        print("4. What is the salary of a player who has the lowest 2 pointer percentage, compared to the highest 2 pointer percentage player.")
-        print("5. Which players have a higher 3-point percentage than 2-point percentage?")
+        print("2. Display the basic information about a certain player.")
+        print("3. Display statistics a certain player. (Advanced statistics are in the shots menu)")
+        print("4. Find how long a certain player has been playing for.")
+        print("5. Find what is the average height for a certain position.")
+        print("6. Find what is the average weight for a certain position.")
+        print("7. Show a stat of choice for a certain position.")
+        print("8. Compare two different players' statistics.")
+        print("9. Find top 10 ?(performance stat) per game?") #no comprendo, so no clue how to translate that into an actual sentence
 
         choice = input("Enter your choice: ")
 
@@ -861,9 +865,14 @@ def shotsMenu(_conn):
     while True:
         print("\nShots Menu")
         print("1. Back to main menu.")
-        print("2. ")
-        print("3. ")
-        print("4. ")
+        print("2. Display advanced statisctics of a certain player. (FG, FGA, FG%, 3P, 3PA, 3P%, 2P, 2PA, 2P%, eFG%, FT, FTA, FT%)")
+        print("3. Compare two player's efficiency. ")
+        print("4. Show the league's average for a certain stat.")
+        print("5. Find a certain player's advance stat of choice rank in category.") #no comprendo, no comprendooo
+        print("6. Find the leage's average shooting performance for a certain position.")
+        print("7. Find out a certain player's shooting performance. (2p, 3p, FT)")
+        print("8. Show all player's whose certain stat is above a certain threshold. (FG, FGA, FG%, 3P, 3PA, 3P%, 2P, 2PA, 2P%, eFG%, FT, FTA, FT%)")
+        print("9. Display top 10 performers in a certain stat category.")
 
         choice = input("Enter your choice: ")
 
