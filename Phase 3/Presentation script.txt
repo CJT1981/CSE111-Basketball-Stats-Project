@@ -1,0 +1,29 @@
+System Description
+DBconnHenry.py is a Python-based application designed for managing and analyzing basketball-related data. 
+It incorporates a SQLite database to store comprehensive data about players, games, coaches, and news, primarily focused on basketball. 
+The application is tailored for sports data management and analysis, offering insights into player performances and sports events.
+
+
+Use-Case Description
+The key interactions between the user and the application include:
+
+Viewing and Filtering News: 
+    Users can view all news items or apply filters to view news by specific types or dates, providing customized access to sports-related news.
+Analyzing Player and Team Statistics: 
+    The application allows users to input a player's name and team to retrieve and analyze detailed statistics, 
+    such as average points, rebounds, assists, steals, and blocks per game.
+User Interaction via Text-based Interface: 
+    Users navigate through the application using a series of menu options and prompts in a command-line interface, \
+    making data access and analysis straightforward and efficient.
+
+
+Implementation Details
+
+Database: 
+    SQLite, chosen for its lightweight and file-based nature, ideal for small-scale applications.
+User Interface: 
+    A simple, text-based command-line interface that facilitates user interaction through textual commands and choices.
+Programming Language and Libraries: 
+    Python, utilizing the sqlite3 module for database operations, which indicates a focus on simplicity and efficiency in development and deployment.
+
+This system is particularly suited for sports analysts, team managers, or basketball enthusiasts who require a tool for detailed data-driven analysis and management of basketball statistics.

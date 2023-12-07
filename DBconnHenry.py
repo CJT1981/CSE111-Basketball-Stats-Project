@@ -193,7 +193,6 @@ def populateTables(_conn):
 
 
 def insertValues(_conn, sql_file):
-
     cursor = _conn.cursor()
 
     with open(sql_file, 'r') as file:
@@ -206,15 +205,14 @@ def insertValues(_conn, sql_file):
 def main():
     database = r"Project_Database.sqlite"
 
-    # create a database connection
-    conn = openConnection(database)
-    with conn:
-        dropTable(conn)
-        createTable(conn)
-        populateTables(conn)
-        mainMenu(conn)
+    _conn = openConnection(database)
+    with _conn:
+        dropTable(_conn)
+        createTable(_conn)
+        populateTables(_conn)
+        mainMenu(_conn)
 
-    closeConnection(conn, database)
+    closeConnection(_conn, database)
 
 
 def mainMenu(_conn):
@@ -306,8 +304,7 @@ def coachesMenu(_conn):
 
             cursor.close()
         elif choice == "5":
-            c_name_input = input(
-                "Enter the full name of the coach: ").strip().lower()
+            c_name_input = input("Enter the full name of the coach: ").lower()
 
             cursor = _conn.cursor()
 
@@ -343,7 +340,7 @@ def gameMenu(_conn):
         print("7. Find how many away games did a certain team win.")
         print("8. Find how many games did a certain team win and lose.")
         print("9. Find a certain team's overall ranking.")
-        print("10. ")
+        print("10. Find a certain team's longest winning streak.")
 
         choice = input("Enter your choice: ")
 
@@ -383,8 +380,8 @@ def gameMenu(_conn):
 
             cursor.close()
         elif choice == "3":
-            team1 = input("Enter the first team's name: ").strip().lower()
-            team2 = input("Enter the second team's name: ").strip().lower()
+            team1 = input("Enter the first team's name: ").lower()
+            team2 = input("Enter the second team's name: ").lower()
 
             cursor = _conn.cursor()
 
@@ -600,6 +597,54 @@ def gameMenu(_conn):
                     f"No data found for {team_name} or the team name is incorrect.")
 
             cursor.close()
+        elif choice == "10":
+            team_name = input("Enter the team's name: ").lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            WITH OrderedGames AS (
+                SELECT 
+                    g.g_date,
+                    t.t_teamid,
+                    t.t_name,
+                    CASE WHEN g.g_winner = t.t_teamid THEN 1 ELSE 0 END AS IsWin,
+                    ROW_NUMBER() OVER (PARTITION BY t.t_teamid ORDER BY g.g_date) AS RowNum
+                FROM 
+                    game g
+                    JOIN team t ON (g.g_home = t.t_teamid OR g.g_away = t.t_teamid)
+                WHERE 
+                    LOWER(t.t_name) = ? AND g.g_date < '2023-04-11'
+            ),
+            Streaks AS (
+                SELECT 
+                    og.t_teamid,
+                    og.t_name,
+                    og.IsWin,
+                    og.RowNum - ROW_NUMBER() OVER (PARTITION BY og.t_teamid, og.IsWin ORDER BY og.g_date) AS StreakGroup
+                FROM 
+                    OrderedGames og
+                WHERE 
+                    og.IsWin = 1
+            )
+            SELECT 
+                s.t_name,
+                MAX(COUNT(*)) OVER (PARTITION BY s.t_teamid) AS LongestWinStreak
+            FROM 
+                Streaks s
+            GROUP BY 
+                StreakGroup, s.t_teamid, s.t_name;
+            """
+            cursor.execute(query, (team_name,))
+            result = cursor.fetchone()
+
+            if result:
+                print(
+                    f"The longest winning streak for {result[0]} is {result[1]} games.")
+            else:
+                print(f"No winning streak data found or the team name is incorrect.")
+
+            cursor.close()
         else:
             print("Invalid choice, please try again.")
 
@@ -722,10 +767,15 @@ def playerMenu(_conn):
     while True:
         print("\nPlayer Menu")
         print("1. Back to main menu.")
-        print("2. Show a player's biography")
-        print("3. Find a stat for a player")
-        print("4. Show top 10 players for a stat: ")
-        print("5. Find the top 10 players for a stat based on a position: ")
+        print("2. Display the basic information about a certain player.")
+        print("3. Display statistics a certain player. (Advanced statistics are in the shots menu)")
+        print("4. Find how long a certain player has been playing for.")
+        print("5. Find what is the average height for a certain position.")
+        print("6. Find what is the average weight for a certain position.")
+        print("7. Show a stat of choice for a certain position.")
+        print("8. Compare two different players' statistics.")
+        # no comprendo, so no clue how to translate that into an actual sentence
+        print("9. Find top 10 ?(performance stat) per game?")
 
         choice = input("Enter your choice: ")
         playerStats = "Per game statistics, you can look into are:\nppg = Points\nrpg = Rebounds\napg = Assists\nspg = Steals\nbpg = Blocks\nFGpercent = FG%\n3ppercent = 3PT%"
@@ -851,13 +901,9 @@ def shotsMenu(_conn):
     while True:
         print("\nShots Menu")
         print("1. Back to main menu.")
-        print("2. League average for every advance statistic:")
-        print("3. Show the top 10 players in a advanced stat:")
-        print("4. Show a player's efficiency stats:")
-        print("5. Show a player's per game shot frequency:")
-        print("5. Compare two players efficiency:")
-        print("6. Show all players with an advance stat above a threshold:")
-        print("7. Show the top 10 players in an advance stat:")
+        print("2. ")
+        print("3. ")
+        print("4. ")
 
         choice = input("Enter your choice: ")
         advPlayerStats = "FG = Field Goals Made\nFGA = Field Goals Attempted\nFGPCT\n3P - 3-Pointer Made\n3PA = 3-Pointer Attempts\n3PPCT = 3-Point %\n2P = 2-Pointer Made\n2PA = 2-Pointer Attempts\n2PPCT = 2-Point %\neFGPCT = Effective Field Goal %\nFT = Free Throws Made \nFTA = Free Throw Attempts\nFTPCT = Free Throw %"
@@ -954,8 +1000,8 @@ def stadiumMenu(_conn):
         print("\nStadium Menu")
         print("1. Back to main menu.")
         print("2. Which stadium was used the most during the entire 2022 - 2023 basketball season?")
-        print("3. ")
-        print("4. ")
+        print("3. Find the capacity of a certain stadium.")
+        print("4. Find the location of a certain stadium.")
 
         choice = input("Enter your choice: ")
 
@@ -966,7 +1012,7 @@ def stadiumMenu(_conn):
 
             query = """
             SELECT st_name as stadium, count(*) as num_games
-            FROM games, stadium
+            FROM game, stadium
             WHERE g_stadium = st_stadiumid
             GROUP BY stadium
             ORDER BY num_games DESC
@@ -979,14 +1025,49 @@ def stadiumMenu(_conn):
                 print(
                     f"The {result[0]} stadium was used the most - {result[1]} times.")
             else:
-                print("No data available.")
+                print("No data available or the stadium name is incorrect.")
 
             cursor.close()
         elif choice == "3":
+            stadium_name = input("Enter the stadium's name: ")
 
-            pass
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT st_name as stadium, st_size
+            FROM stadium
+            WHERE LOWER(st_name) = ?;
+            """
+            cursor.execute(query, (stadium_name,))
+            result = cursor.fetchone()
+
+            if result:
+                print(
+                    f"The {result[0]} stadium has a capacity of {result[1]} seats.")
+            else:
+                print("No data available or the stadium name is incorrect.")
+
+            cursor.close()
         elif choice == "4":
-            pass
+            stadium_name = input("Enter the stadium's name: ")
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT st_name as stadium, st_location
+            FROM stadium
+            WHERE LOWER(st_name) = ?;
+            """
+            cursor.execute(query, (stadium_name,))
+            result = cursor.fetchone()
+
+            if result:
+                print(
+                    f"The {result[0]} stadium is located in {result[1]}.")
+            else:
+                print("No data available or the stadium name is incorrect.")
+
+            cursor.close()
         else:
             print("Invalid choice, please try again.")
 
@@ -995,100 +1076,222 @@ def teamMenu(_conn):
     while True:
         print("\nTeam Menu")
         print("1. Back to main menu.")
-        print("2. Find out how many games did the youngest team founded won during the 2022 - 2023 season.")
-        print("3. Which team won the championship during the 2022 - 2023 season?")
-        print("4. For each team, list the number of players in each position.")
-        print("5.  Which team has the highest total salary for their players?")
+        print("2. Display a certain team's basic information.")
+        print("3. Display a certain team's roster.")
+        print("4. Display a certain team's payroll.")
+        print("5. Display average statistics a certain team. (PPG, RPG, APG, SPG, BPG)")
+        print("6. Display average advanced statistics a certain team. (FG, FGA, FG%, 3P, 3PA, 3P%, 2P, 2PA, 2P%, eFG%, FT, FTA, FT%)")
+        print(
+            "7. Display top 5 top performers in a certain team. (PPG, RPG, APG, SPG, BPG)")
+        print("8. Display a certain player's average statistics against a certain team's average statistics.")
 
         choice = input("Enter your choice: ")
 
         if choice == "1":
             break
         elif choice == "2":
+            team_name = input("Enter the team name: ").lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT t_name, t_foundyear, t_city, c_name, st_name
+            FROM team, coaches, stadium
+            WHERE LOWER(t_name) = ?
+            AND t_coachid = c_coachid
+            AND t_stadiumid = st_stadiumid;
+            """
+            cursor.execute(query, (team_name,))
+            result = cursor.fetchone()
+
+            if result:
+                print("Team Name | Found Year | City | Head Coach | Home Stadium")
+                print(
+                    f"{result[0]} | {result[1]} | {result[2]} | {result[3]} | {result[4]}")
+            else:
+                print("No data available or team name is incorrect.")
+
+            cursor.close()
+        elif choice == "3":
+            team_name = input("Enter the team name: ").lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT p_name, p_position
+            FROM team, player
+            WHERE LOWER(t_name) = ?
+            AND t_teamid = p_teamid;
+            """
+            cursor.execute(query, (team_name,))
+            result = cursor.fetchall()
+
+            if result:
+                print("Position | Player Name")
+                for row in result:
+                    print(f"{row[1]} | {row[0]}")
+            else:
+                print("No data available or team name is incorrect.")
+
+            cursor.close()
+        elif choice == "4":
+            team_name = input("Enter the team's name: ").lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT p_name, p_salary
+            FROM player, team
+            WHERE p_teamid = t_teamid
+            AND LOWER(t_name) = ?;
+            """
+            cursor.execute(query, (team_name,))
+            result = cursor.fetchall()
+
+            if result:
+                print("Player Name | Salary")
+                for row in result:
+                    print(f"{row[0]} | {row[1]}")
+
+                query = """
+                SELECT t_name, SUM(p_salary) AS Total_Payroll
+                FROM player, team
+                WHERE p_teamid = t_teamid
+                AND LOWER(t_name) = ?;
+                """
+                cursor.execute(query, (team_name,))
+                result = cursor.fetchone()
+
+                if result:
+                    print(f"Total Payroll: {result[0]}: {result[1]}")
+                else:
+                    print("Unable to calculate the total payroll.")
+            else:
+                print("No players or team found with the given name.")
+
+            cursor.close()
+        elif choice == "5":
+            team_name = input("Enter the team's name: ").lower()
+
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT AVG(p_ppg), AVG(p_rpg), AVG(p_apg), AVG(p_spg), AVG(p_bpg)
+            FROM player, team 
+            WHERE p_teamid = t_teamid
+            AND LOWER(t_name) = ?;
+            """
+            cursor.execute(query, (team_name,))
+            result = cursor.fetchone()
+
+            if result:
+                print("PPG | RPG | APG | SPG | BPG")
+                print(
+                    f"{result[0]:.2f} | {result[1]:.2f} | {result[2]:.2f} | {result[3]:.2f} | {result[4]:.2f}")
+            else:
+                print("No data available or team name is incorrect.")
+
+            cursor.close()
+        elif choice == "6":
+            team_name = input("Enter the team's name: ").lower()
+
             cursor = _conn.cursor()
 
             query = """
             SELECT 
-                t_name as team, 
-                t_foundyear as found_year, 
-                (   
-                    SELECT count(*)
-                    FROM games
-                    WHERE g_winner = t_teamid
-                ) as games_won
-            FROM team 
-            WHERE t_foundyear = (SELECT MAX(t_foundyear) from team);
+                AVG(s_FG), AVG(s_FGA), AVG(s_FGPCT), AVG(s_3P), AVG(s_3PA), AVG(s_3PPCT), AVG(s_2P),
+                AVG(s_2PA), AVG(s_2PPCT), AVG(s_eFGPCT), AVG(s_FT), AVG(s_FTA), AVG(s_FTPCT)
+            FROM shots, player, team
+            WHERE s_playerid = p_playerid
+            AND p_teamid = t_teamid
+            AND LOWER(t_name) = ?;
             """
-            cursor.execute(query)
+            cursor.execute(query, (team_name,))
             result = cursor.fetchone()
 
             if result:
                 print(
-                    f"The {result[0]} team was founded in {result[1]} and won {result[2]} games during the 2022 - 2023 championship.")
-            else:
-                print("No data available.")
-
-            cursor.close()
-        elif choice == "3":
-            cursor = _conn.cursor()
-
-            query = """
-            SELECT t1.t_name as winner, g_score as score, t2.t_name as runnerup
-            FROM games, team t1, team t2
-            WHERE g_winner = t1.t_teamid
-            AND (g_home = t2.t_teamid OR g_away = t2.t_teamid)
-            AND t2.t_teamid <> g_winner
-            ORDER BY g_date DESC
-            LIMIT 1;
-            """
-            cursor.execute(query)
-            result = cursor.fetchone()
-
-            if result:
+                    "FG | FGA | FG% | 3P | 3PA | 3P% | 2P | 2PA | 2P% | eFG% | FT | FTA | FT%")
                 print(
-                    f"{result[0]} entered finals with {result[2]} and won with the score {result[1]}.")
+                    f"{result[0]:.2f} | {result[1]:.2f} | {result[2]:.2f}% | "
+                    f"{result[3]:.2f} | {result[4]:.2f} | {result[5]:.2f}% | "
+                    f"{result[6]:.2f} | {result[7]:.2f} | {result[8]:.2f}% | "
+                    f"{result[9]:.2f}% | {result[10]:.2f} | {result[11]:.2f} | {result[12]:.2f}%"
+                )
+
             else:
-                print("No data available.")
+                print("No data available or team name is incorrect.")
 
             cursor.close()
-        elif choice == "4":
+        elif choice == "7":
+            team_name = input("Enter the team's name: ").lower()
+
             cursor = _conn.cursor()
 
             query = """
-            SELECT t_name, p_position, COUNT(*) AS number_of_players
-            FROM team, player
-            WHERE t_teamid = p_teamid
-            GROUP BY t_name, p_position;
+            SELECT 
+                p_name,
+                p_ppg,
+                p_rpg,
+                p_apg,
+                p_spg,
+                p_bpg
+            FROM player, team 
+            WHERE p_teamid = t_teamid
+            AND LOWER(t_name) = ?
+            ORDER BY p_ppg DESC
+            LIMIT 5;
             """
-            cursor.execute(query)
+            cursor.execute(query, (team_name,))
             result = cursor.fetchall()
 
             if result:
-                print(f"Team Name | Player Position | Number of Players")
+                print("Player Name | PPG | RPG | APG | SPG | BPG")
                 for row in result:
-                    print(f"{row[0]} | {row[1]} | {row[2]}")
+                    ppg = float(row[1]) if row[1] else 0
+                    rpg = float(row[2]) if row[2] else 0
+                    apg = float(row[3]) if row[3] else 0
+                    spg = float(row[4]) if row[4] else 0
+                    bpg = float(row[5]) if row[5] else 0
+
+                    print(
+                        f"{row[0]} | {ppg:.2f} | {rpg:.2f} | {apg:.2f} | {spg:.2f} | {bpg:.2f}")
             else:
-                print("No data available.")
+                print("No data available or team name is incorrect.")
 
             cursor.close()
-        elif choice == "5":
+        elif choice == "8":
+            player_name = input("Enter player's name: ").lower()
+            team_name = input("Enter the team's name: ").lower()
+
             cursor = _conn.cursor()
 
             query = """
-            SELECT t_name, SUM(p_salary) AS total_salary
-            FROM team, player
-            WHERE t_teamid = p_teamid
-            GROUP BY t_name
-            ORDER BY total_salary DESC;
+            SELECT 
+                (SELECT AVG(p_ppg) FROM player WHERE LOWER(p_name) = ?) AS Player_PPG,
+                (SELECT AVG(p_rpg) FROM player WHERE LOWER(p_name) = ?) AS Player_RPG,
+                (SELECT AVG(p_apg) FROM player WHERE LOWER(p_name) = ?) AS Player_APG,
+                (SELECT AVG(p_spg) FROM player WHERE LOWER(p_name) = ?) AS Player_SPG,
+                (SELECT AVG(p_bpg) FROM player WHERE LOWER(p_name) = ?) AS Player_BPG,
+                (SELECT AVG(p_ppg) FROM player p JOIN team t ON p.p_teamid = t.t_teamid WHERE LOWER(t.t_name) = ?) AS Team_PPG,
+                (SELECT AVG(p_rpg) FROM player p JOIN team t ON p.p_teamid = t.t_teamid WHERE LOWER(t.t_name) = ?) AS Team_RPG,
+                (SELECT AVG(p_apg) FROM player p JOIN team t ON p.p_teamid = t.t_teamid WHERE LOWER(t.t_name) = ?) AS Team_APG,
+                (SELECT AVG(p_spg) FROM player p JOIN team t ON p.p_teamid = t.t_teamid WHERE LOWER(t.t_name) = ?) AS Team_SPG,
+                (SELECT AVG(p_bpg) FROM player p JOIN team t ON p.p_teamid = t.t_teamid WHERE LOWER(t.t_name) = ?) AS Team_BPG;
+
             """
-            cursor.execute(query)
+            cursor.execute(query, (player_name, player_name, player_name, player_name,
+                           player_name, team_name, team_name, team_name, team_name, team_name,))
             result = cursor.fetchone()
 
             if result:
+                print("PPG | RPG | APG | SPG | BPG")
                 print(
-                    f"{result[0]} has the total highest salary of ${result[1]} for their players.")
+                    f"{result[0]:.2f} | {result[1]:.2f} | {result[2]:.2f} | {result[3]:.2f} | {result[4]:.2f}")
+                print(
+                    f"{result[5]:.2f} | {result[6]:.2f} | {result[7]:.2f} | {result[8]:.2f} | {result[9]:.2f}")
             else:
-                print("No data available.")
+                print("No data available or team name is incorrect.")
 
             cursor.close()
         else:
