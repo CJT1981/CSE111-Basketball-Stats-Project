@@ -280,8 +280,24 @@ def coachesMenu(_conn):
 
             cursor.close()
         elif choice == "3":
+            c_name_input = input("Enter the full name of the coach: ").lower()
 
-            pass
+            cursor = _conn.cursor()
+
+            query = """
+            SELECT c_numofchamp
+            FROM coaches
+            WHERE LOWER(c_name) = ?;
+            """
+            cursor.execute(query, (c_name_input,))
+            result = cursor.fetchone()
+
+            if result:
+                print(f"{c_name_input.title()} has won {result[0]} championship(s).")
+            else:
+                print("No data available or coach not found.")
+
+            cursor.close()
         elif choice == "4":
             c_name_input = input("Enter the full name of the coach: ").lower()
 
