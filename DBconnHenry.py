@@ -768,15 +768,12 @@ def playerMenu(_conn):
     while True:
         print("\nPlayer Menu")
         print("1. Back to main menu.")
-        print("2. Display the basic information about a certain player.")
-        print("3. Display statistics a certain player. (Advanced statistics are in the shots menu)")
-        print("4. Find how long a certain player has been playing for.")
-        print("5. Find what is the average height for a certain position.")
-        print("6. Find what is the average weight for a certain position.")
-        print("7. Show a stat of choice for a certain position.")
-        print("8. Compare two different players' statistics.")
-        # no comprendo, so no clue how to translate that into an actual sentence
-        print("9. Find top 10 ?(performance stat) per game?")
+        print("2. Show a player's biography:")
+        print("3. Show a particular performance stat for a player:")
+        print("4. Show top 10 players for a particular performance stat:")
+        print("5. Show top 10 players based on a particular player position and performance stat:")
+        print("6. Compare two players' performance statistics.")
+        print("7. Show all players based on a particular performance stat threshold:")
 
         choice = input("Enter your choice: ")
         playerStats = "Per game statistics, you can look into are:\nppg = Points\nrpg = Rebounds\napg = Assists\nspg = Steals\nbpg = Blocks\nFGpercent = FG%\n3ppercent = 3PT%"
@@ -894,6 +891,66 @@ def playerMenu(_conn):
                 print("No data available.")
 
             cursor.close()
+        elif choice == "6":
+            cursor = _conn.cursor()
+
+            player = input("Enter the first of two players: ")
+            playerOne = player.lower()
+            player = input("Enter the second of two players: ")
+            playerTwo = player.lower()
+
+            query = """
+            SELECT 
+                p_name, 
+                p_ppg,
+                p_rpg,
+                p_apg,
+                p_spg,
+                p_bpg
+            FROM player
+            WHERE
+                LOWER(p_name) = ?
+            """
+            cursor.execute(query, (playerOne,))
+            resultOne = cursor.fetchone()
+            cursor.execute(query, (playerTwo,))
+            resultTwo = cursor.fetchone()
+
+            if resultOne and resultTwo:
+                print(f"Player Name | PPG | RPG | APG | SPG | BPG")
+                print(
+                    f"{resultOne[0]} | {resultOne[1]} | {resultOne[2]} | {resultOne[3]} | {resultOne[4]} | {resultOne[5]}")
+                print(
+                    f"{resultTwo[0]} | {resultTwo[1]} | {resultTwo[2]} | {resultTwo[3]} | {resultTwo[4]} | {resultTwo[5]}")
+            else:
+                print("No Data Available")
+
+            cursor.close()
+        elif choice == "7":
+            cursor = _conn.cursor()
+
+            print(playerStats)
+            stat = input("Enter a stat: ")
+            stat_input = "p_" + stat
+            threshold = input(
+                "What is the minimum threshold you want to place: ")
+
+            query = """
+            SELECT 
+                p_name, """ + stat_input + """
+            FROM player
+            WHERE
+            """ + stat_input + """ >= ?
+            ORDER BY """ + stat_input + """ DESC
+            """
+            cursor.execute(query, (threshold,))
+            result = cursor.fetchall()
+
+            if result:
+                print(f"Player Name | {stat_input} ")
+                for row in result:
+                    print(
+                        f"{row[0]} | {row[1]} ")
         else:
             print("Invalid choice, please try again.")
 
@@ -905,10 +962,14 @@ def shotsMenu(_conn):
         print("2. League Average for each advanced statistic:")
         print("3. Find a player's specific advanced statistic:")
         print("4. Find a player's efficency statistics:")
-        print("5. Compare two players efficiency:")
+        print("5. Find a player's made-attempt statistics:")
+        print("6. Compare two players efficiency:")
+        print("7. Show 10 best players for statistic:")
+        print("8. Show all players with a statistic above a threshold:")
 
         choice = input("Enter your choice: ")
-        advPlayerStats = "FG = Field Goals Made\nFGA = Field Goals Attempted\nFGPCT\n3P - 3-Pointer Made\n3PA = 3-Pointer Attempts\n3PPCT = 3-Point %\n2P = 2-Pointer Made\n2PA = 2-Pointer Attempts\n2PPCT = 2-Point %\neFGPCT = Effective Field Goal %\nFT = Free Throws Made \nFTA = Free Throw Attempts\nFTPCT = Free Throw %"
+        advPlayerStats = "FG = Field Goals Made\nFGA = Field Goals Attempted\nFGPCT = Field Goal %\n3P - 3-Pointer Made\n3PA = 3-Pointer Attempts\n3PPCT = 3-Point %\n2P = 2-Pointer Made\n2PA = 2-Pointer Attempts\n2PPCT = 2-Point %\neFGPCT = Effective Field Goal %\nFT = Free Throws Made \nFTA = Free Throw Attempts\nFTPCT = Free Throw %"
+        playerPosition = "1 = Point Guard\n2 = Shooting Guard\n3 = Small Forward\n4 = Point Forward\n5 = Center"
 
         if choice == "1":
             break
@@ -997,6 +1058,39 @@ def shotsMenu(_conn):
         elif choice == "5":
             cursor = _conn.cursor()
 
+            player = input("Enter a player's name: ")
+            playerName = player.lower()
+
+            query = """
+            SELECT 
+                s_playername, 
+                s_FG, 
+                s_FGA,
+                s_3P, 
+                s_3PA,
+                s_2P, 
+                s_2PA,
+                s_FT, 
+                s_FTA
+            FROM shots
+            WHERE
+                LOWER(s_playername) = ?
+            """
+            cursor.execute(query, (playerName,))
+            result = cursor.fetchall()
+
+            if result:
+                row = result[0]
+                print(f"Player Name | FGM | FGA | 3PM | 3PA% | 2PM | 2PA | FTM | FTA")
+                print(
+                    f"{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]} | {row[7]} | {row[8]}")
+            else:
+                print("No Data Available")
+
+            cursor.close()
+        elif choice == "6":
+            cursor = _conn.cursor()
+
             player = input("Enter the first of two players: ")
             playerOne = player.lower()
             player = input("Enter the second of two players: ")
@@ -1025,6 +1119,66 @@ def shotsMenu(_conn):
                     f"{resultOne[0]} | {resultOne[1]} | {resultOne[2]} | {resultOne[3]} | {resultOne[4]} | {resultOne[5]}")
                 print(
                     f"{resultTwo[0]} | {resultTwo[1]} | {resultTwo[2]} | {resultTwo[3]} | {resultTwo[4]} | {resultTwo[5]}")
+            else:
+                print("No Data Available")
+
+            cursor.close()
+        elif choice == "7":
+            cursor = _conn.cursor()
+
+            print(playerPosition)
+            position = input("Enter a position: ")
+            print(advPlayerStats)
+            advStat = input("Enter a stat: ")
+            statInput = "s_" + advStat
+
+            query = """
+            SELECT 
+                s_playername, """ + statInput + """
+            FROM shots, player
+            WHERE
+                s_playername = p_name AND
+                p_position = ?
+            ORDER BY """ + statInput + """ DESC
+            LIMIT 10
+            """
+            cursor.execute(query, (position,))
+            result = cursor.fetchall()
+
+            if result:
+                print(f"Player Name | {advStat} ")
+                for row in result:
+                    print(
+                        f"{row[0]} | {row[1]} ")
+            else:
+                print("No Data Available")
+
+            cursor.close()
+        elif choice == "8":
+            cursor = _conn.cursor()
+
+            print(advPlayerStats)
+            stat = input("Enter a stat: ")
+            stat_input = "s_" + stat
+            threshold = input(
+                "What is the minimum threshold you want to place: ")
+
+            query = """
+            SELECT 
+                s_playername, """ + stat_input + """
+            FROM shots
+            WHERE
+            """ + stat_input + """ >= ?
+            ORDER BY """ + stat_input + """ DESC
+            """
+            cursor.execute(query, (threshold,))
+            result = cursor.fetchall()
+
+            if result:
+                print(f"Player Name | {stat_input} ")
+                for row in result:
+                    print(
+                        f"{row[0]} | {row[1]} ")
             else:
                 print("No Data Available")
 
