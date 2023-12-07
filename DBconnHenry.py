@@ -413,9 +413,11 @@ def gameMenu(_conn):
             result = cursor.fetchall()
 
             if result:
-                print("Game ID | Home Team | Away Team | Date | Winner Team | Score | Stadium")
+                print(
+                    "Game ID | Home Team | Away Team | Date | Winner Team | Score | Stadium")
                 for row in result:
-                    print(f"{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]}")
+                    print(
+                        f"{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]}")
             else:
                 print("No games found between these two teams.")
 
@@ -459,7 +461,8 @@ def gameMenu(_conn):
 
             cursor.close()
         elif choice == "5":
-            month_input = input("Enter the year and month you are looking for in the following format YYYY-MM: ")
+            month_input = input(
+                "Enter the year and month you are looking for in the following format YYYY-MM: ")
             month_input = month_input + '%'
 
             cursor = _conn.cursor()
@@ -486,10 +489,12 @@ def gameMenu(_conn):
             result = cursor.fetchall()
 
             if result:
-                print("Game ID | Home Team | Away Team | Date | Winner Team | Score | Stadium")
+                print(
+                    "Game ID | Home Team | Away Team | Date | Winner Team | Score | Stadium")
                 for row in result:
-                    print(f"{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]}")
-            
+                    print(
+                        f"{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} | {row[6]}")
+
             else:
                 print("No data available or the date is incorrect.")
 
@@ -512,9 +517,11 @@ def gameMenu(_conn):
             result = cursor.fetchone()
 
             if result and result[1] > 0:
-                print(f"{result[0]} has won {result[2]} home game(s) out of {result[1]}.")
+                print(
+                    f"{result[0]} has won {result[2]} home game(s) out of {result[1]}.")
             else:
-                print(f"{team_name} has not won any home games or the team name is incorrect.")
+                print(
+                    f"{team_name} has not won any home games or the team name is incorrect.")
 
             cursor.close()
         elif choice == "7":
@@ -535,9 +542,11 @@ def gameMenu(_conn):
             result = cursor.fetchone()
 
             if result and result[1] > 0:
-                print(f"{result[0]} has won {result[2]} away game(s) out of {result[1]}.")
+                print(
+                    f"{result[0]} has won {result[2]} away game(s) out of {result[1]}.")
             else:
-                print(f"{team_name} has not won any home games or the team name is incorrect.")
+                print(
+                    f"{team_name} has not won any home games or the team name is incorrect.")
 
             cursor.close()
         elif choice == "8":
@@ -559,7 +568,8 @@ def gameMenu(_conn):
             if result:
                 print(f"{result[0]} has a record of {result[1]}-{result[2]}.")
             else:
-                print(f"{team_name} has not won any home games or the team name is incorrect.")
+                print(
+                    f"{team_name} has not won any home games or the team name is incorrect.")
 
             cursor.close()
         elif choice == "9":
@@ -586,7 +596,8 @@ def gameMenu(_conn):
             if result:
                 print(f"{result[0]} - Wins: {result[1]}, Losses: {result[2]}")
             else:
-                print(f"No data found for {team_name} or the team name is incorrect.")
+                print(
+                    f"No data found for {team_name} or the team name is incorrect.")
 
             cursor.close()
         else:
@@ -626,6 +637,7 @@ def newsMenu(_conn):
             else:
                 print("No data available.")
             cursor.close()
+
         elif choice == "3":
             print(tradeTypes)
             newsType = input(
@@ -710,30 +722,43 @@ def playerMenu(_conn):
     while True:
         print("\nPlayer Menu")
         print("1. Back to main menu.")
-        print("2. Who is the tallest player?")
-        print("3. Find top 5 players that have the highest field goal percentage and which teams they play for.")
-        print("4. What is the salary of a player who has the lowest 2 pointer percentage, compared to the highest 2 pointer percentage player.")
-        print("5. Which players have a higher 3-point percentage than 2-point percentage?")
+        print("2. Show a player's biography")
+        print("3. Find a stat for a player")
+        print("4. Show top 10 players for a stat: ")
+        print("5. Find the top 10 players for a stat based on a position: ")
 
         choice = input("Enter your choice: ")
+        playerStats = "Per game statistics, you can look into are:\nppg = Points\nrpg = Rebounds\napg = Assists\nspg = Steals\nbpg = Blocks\nFGpercent = FG%\n3ppercent = 3PT%"
+        playerPosition = "1 = Point Guard\n2 = Shooting Guard\n3 = Small Forward\n4 = Point Forward\n5 = Center"
 
         if choice == "1":
             break
         elif choice == "2":
             cursor = _conn.cursor()
 
+            name = input("Enter a player, who you want to see: ")
+            playerName = name.lower()
+
             query = """
-            SELECT p_name, p_height
+            SELECT 
+                p_name,
+                p_teamname, 
+                p_position, 
+                p_height, 
+                p_weight, 
+                p_startyear, 
+                p_salary
             FROM player
-            ORDER BY p_height DESC
-            LIMIT 1;
+            WHERE
+                LOWER(p_name) = ?
             """
-            cursor.execute(query)
+            cursor.execute(query, (playerName,))
             result = cursor.fetchone()
 
             if result:
+                print(f"Name | Team | Position | Height | Weight | Start Year | Salary")
                 print(
-                    f"The tallest player is {result[0]} with a height of {result[1]} ft.")
+                    f"{result[0]} | {result[1]} | {result[2]} | {result[3]} | {result[4]} | {result[5]} | {result[6]}")
             else:
                 print("No data available.")
 
@@ -741,20 +766,25 @@ def playerMenu(_conn):
         elif choice == "3":
             cursor = _conn.cursor()
 
+            playerName = input("What player do you want to look into: ")
+            name = playerName.lower()
+            print(playerStats)
+            stat = input("What statistic do you want to look at: ")
+            stats = "p_" + stat
+
             query = """
-            SELECT p_name, p_fgpercent, t_name
-            FROM player, team
-            WHERE p_teamid = t_teamid
-            ORDER BY p_fgpercent DESC
-            LIMIT 5;
+            SELECT 
+                p_name, """ + stats + """
+            FROM player
+            WHERE 
+                LOWER(p_name) = ?
             """
-            cursor.execute(query)
-            result = cursor.fetchall()
+            cursor.execute(query, (name,))
+            result = cursor.fetchone()
 
             if result:
-                print(f"Player Name | FG % | Team Name")
-                for row in result:
-                    print(f"{row[0]} | {row[1]} | {row[2]}")
+                print(f"Player Name | {stat}")
+                print(f"{result[0]} | {result[1]}")
             else:
                 print("No data available.")
 
@@ -762,32 +792,24 @@ def playerMenu(_conn):
         elif choice == "4":
             cursor = _conn.cursor()
 
+            print(playerStats)
+            stat = input("What statistic would you like to see: ")
+            stats = "p_" + stat
+
             query = """
-            SELECT * FROM (
-                SELECT p_name AS PlayerName, s_2PPCT AS TwoPointPercentage, p_salary AS Salary
-                FROM player, shots
-                WHERE p_playerid = s_playerid
-                ORDER BY s_2PPCT ASC
-                LIMIT 1
-            )
-
-            UNION ALL
-
-            SELECT * FROM (
-                SELECT p_name AS PlayerName, s_2PPCT AS TwoPointPercentage, p_salary AS Salary
-                FROM player, shots
-                WHERE p_playerid = s_playerid
-                ORDER BY s_2PPCT DESC
-                LIMIT 1
-            );
+            SELECT 
+                p_name,""" + stats + """
+            FROM player
+            ORDER BY """ + stats + """ DESC
+            LIMIT 10
             """
             cursor.execute(query)
             result = cursor.fetchall()
 
             if result:
-                print(f"Player Name | 2 Point % | Salary")
+                print(f"Player Name | {stat}")
                 for row in result:
-                    print(f"{row[0]} | {row[1]} | {row[2]}")
+                    print(f"{row[0]} | {row[1]}")
             else:
                 print("No data available.")
 
@@ -795,19 +817,28 @@ def playerMenu(_conn):
         elif choice == "5":
             cursor = _conn.cursor()
 
+            print(playerStats)
+            stat = input("What statistic would you like to see: ")
+            stats = "p_" + stat
+            print(playerPosition)
+            position = input("Select a position: ")
+
             query = """
-            SELECT p_name, p_3Ppercent, s_2Ppct
-            FROM player, shots
-            WHERE s_playerid = p_playerid
-            AND p_3Ppercent > s_2Ppct;
+            SELECT 
+                p_name,""" + stats + """
+            FROM player
+            WHERE 
+                p_position = ? 
+            ORDER BY """ + stats + """ DESC
+            LIMIT 10
             """
-            cursor.execute(query)
+            cursor.execute(query, (position,))
             result = cursor.fetchall()
 
             if result:
-                print(f"Player Name | 3 Point % | 2 Point %")
+                print(f"Player Name | {stat}")
                 for row in result:
-                    print(f"{row[0]} | {row[1]} | {row[2]}")
+                    print(f"{row[0]} | {row[1]}")
             else:
                 print("No data available.")
 
@@ -820,22 +851,100 @@ def shotsMenu(_conn):
     while True:
         print("\nShots Menu")
         print("1. Back to main menu.")
-        print("2. ")
-        print("3. ")
-        print("4. ")
+        print("2. League average for every advance statistic:")
+        print("3. Show the top 10 players in a advanced stat:")
+        print("4. Show a player's efficiency stats:")
+        print("5. Show a player's per game shot frequency:")
+        print("5. Compare two players efficiency:")
+        print("6. Show all players with an advance stat above a threshold:")
+        print("7. Show the top 10 players in an advance stat:")
 
         choice = input("Enter your choice: ")
+        advPlayerStats = "FG = Field Goals Made\nFGA = Field Goals Attempted\nFGPCT\n3P - 3-Pointer Made\n3PA = 3-Pointer Attempts\n3PPCT = 3-Point %\n2P = 2-Pointer Made\n2PA = 2-Pointer Attempts\n2PPCT = 2-Point %\neFGPCT = Effective Field Goal %\nFT = Free Throws Made \nFTA = Free Throw Attempts\nFTPCT = Free Throw %"
 
         if choice == "1":
             break
         elif choice == "2":
+            cursor = _conn.cursor()
 
-            pass
+            query = """
+            SELECT 
+                SUM(s_FG)/300, 
+                SUM(s_FGA)/300, 
+                SUM(s_FGPCT)/300, 
+                SUM(s_3P)/300, 
+                SUM(s_3PA)/300, 
+                SUM(s_3PPCT)/300, 
+                SUM(s_2P)/300, 
+                SUM(s_2PA)/300, 
+                SUM(s_2PPCT)/300, 
+                SUM(s_eFGPCT)/300, 
+                SUM(s_FT)/300, 
+                SUM(s_FTA)/300, 
+                SUM(s_FTPCT)/300
+            FROM shots
+            """
+            cursor.execute(query)
+            result = cursor.fetchall()
+
+            if result:
+                print(
+                    f"FGM | FGA | FG% | 3PM | 3PA | 3P% | 2PM | 2PA | 2P% | eFG% | FTM | FTA | FT%")
+                print(f"{result[0]} | {result[1]} | {result[2]} | {result[3]} | {result[4]} | {result[5]} | {result[6]} | {result[7]} | {result[8]} | {result[9]} | {result[10]} | {result[11]} | {result[12]}")
         elif choice == "3":
+            cursor = _conn.cursor()
 
-            pass
+            print(advPlayerStats)
+            advStat = input("Enter an advance stat to see: ")
+            stats = "s_" + advStat
+
+            query = """
+            SELECT 
+                s_playername, """ + stats + """
+            FROM shots
+            ORDER BY """ + stats + """ DESC
+            LIMIT 10
+            """
+            cursor.execute(query)
+            result = cursor.fetchall()
+
+            if result:
+                print(f"Player Name | {advStat}")
+                for row in result:
+                    print(f"{row[0]} | {row[1]}")
+            else:
+                print("No Data Available")
+
+            cursor.close()
         elif choice == "4":
-            pass
+            cursor = _conn.cursor()
+
+            player = input("Enter a player's name: ")
+            playerName = player.lower()
+
+            query = """
+            SELECT 
+                s_playername, 
+                s_FGPCT,
+                s_3PPCT,
+                s_2PPCT,
+                s_eFGPCT,
+                s_FTPCT
+            FROM shots
+            WHERE
+                LOWER(s_playername) = ?
+            """
+            cursor.execute(query, (playerName,))
+            result = cursor.fetchone()
+
+            if result:
+                print(f"Player Name | FG% | 3PT% | 2PT% | eFG% | FT%")
+                print(
+                    f"{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]}")
+            else:
+                print("No Data Available")
+
+            cursor.close()
         else:
             print("Invalid choice, please try again.")
 
