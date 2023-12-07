@@ -92,6 +92,7 @@ def createTable(_conn):
     create_table_query = """
     CREATE TABLE IF NOT EXISTS shots (
         s_playerid INTEGER REFERENCES Player (p_playerid), 
+        s_teamid INTEGER REFERENCES Team (t_teamid),
         s_playername TEXT, 
         s_FG REAL, 
         s_FGA REAL, 
