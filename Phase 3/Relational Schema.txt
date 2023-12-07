@@ -36,6 +36,7 @@ CREATE TABLE player (
 CREATE TABLE shots (
         s_playerid INTEGER REFERENCES Player (p_playerid),
         s_playername TEXT,
+        s_teamid INTEGER REFERENCES Team (t_teamid),
         s_FG REAL,
         s_FGA REAL,
         s_FGPCT REAL,
