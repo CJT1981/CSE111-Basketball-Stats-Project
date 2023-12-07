@@ -902,9 +902,10 @@ def shotsMenu(_conn):
     while True:
         print("\nShots Menu")
         print("1. Back to main menu.")
-        print("2. ")
-        print("3. ")
-        print("4. ")
+        print("2. League Average for each advanced statistic:")
+        print("3. Find a player's specific advanced statistic:")
+        print("4. Find a player's efficency statistics:")
+        print("5. Compare two players efficiency:")
 
         choice = input("Enter your choice: ")
         advPlayerStats = "FG = Field Goals Made\nFGA = Field Goals Attempted\nFGPCT\n3P - 3-Pointer Made\n3PA = 3-Pointer Attempts\n3PPCT = 3-Point %\n2P = 2-Pointer Made\n2PA = 2-Pointer Attempts\n2PPCT = 2-Point %\neFGPCT = Effective Field Goal %\nFT = Free Throws Made \nFTA = Free Throw Attempts\nFTPCT = Free Throw %"
@@ -935,9 +936,10 @@ def shotsMenu(_conn):
             result = cursor.fetchall()
 
             if result:
+                row = result[0]
                 print(
                     f"FGM | FGA | FG% | 3PM | 3PA | 3P% | 2PM | 2PA | 2P% | eFG% | FTM | FTA | FT%")
-                print(f"{result[0]} | {result[1]} | {result[2]} | {result[3]} | {result[4]} | {result[5]} | {result[6]} | {result[7]} | {result[8]} | {result[9]} | {result[10]} | {result[11]} | {result[12]}")
+                print(f"{row[0]} | {row[1]:.2f} | {row[2]:.2f} | {row[3]:.2f} | {row[4]:.2f} | {row[5]:.2f} | {row[6]:.2f} | {row[7]:.2f} | {row[8]:.2f} | {row[9]:.2f} | {row[10]:.2f} | {row[11]:.2f} | {row[12]:.2f}")
         elif choice == "3":
             cursor = _conn.cursor()
 
@@ -987,7 +989,42 @@ def shotsMenu(_conn):
             if result:
                 print(f"Player Name | FG% | 3PT% | 2PT% | eFG% | FT%")
                 print(
-                    f"{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]}")
+                    f"{result[0]} | {result[1]} | {result[2]} | {result[3]} | {result[4]} | {result[5]}")
+            else:
+                print("No Data Available")
+
+            cursor.close()
+        elif choice == "5":
+            cursor = _conn.cursor()
+
+            player = input("Enter the first of two players: ")
+            playerOne = player.lower()
+            player = input("Enter the second of two players: ")
+            playerTwo = player.lower()
+
+            query = """
+            SELECT 
+                s_playername, 
+                s_FGPCT,
+                s_3PPCT,
+                s_2PPCT,
+                s_eFGPCT,
+                s_FTPCT
+            FROM shots
+            WHERE
+                LOWER(s_playername) = ?
+            """
+            cursor.execute(query, (playerOne,))
+            resultOne = cursor.fetchone()
+            cursor.execute(query, (playerTwo,))
+            resultTwo = cursor.fetchone()
+
+            if resultOne and resultTwo:
+                print(f"Player Name | FG% | 3PT% | 2PT% | eFG% | FT%")
+                print(
+                    f"{resultOne[0]} | {resultOne[1]} | {resultOne[2]} | {resultOne[3]} | {resultOne[4]} | {resultOne[5]}")
+                print(
+                    f"{resultTwo[0]} | {resultTwo[1]} | {resultTwo[2]} | {resultTwo[3]} | {resultTwo[4]} | {resultTwo[5]}")
             else:
                 print("No Data Available")
 
